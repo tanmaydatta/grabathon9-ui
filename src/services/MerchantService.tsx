@@ -62,7 +62,27 @@ const getPosts = async (req: GetPostsReq): Promise<GetPostsRes> => {
         return {
           title: post.title,
           mediaURL: post.media_url,
-          postID: post.post_id,
+          postID: post.id,
+          datePosted: post.date_posted,
+          merchantName: post.merchant_name,
+          mediaType: post.media_mimetype,
+          logoUrl: post.logo_url,
+        };
+      }),
+    };
+  });
+};
+
+const discover = async (): Promise<GetPostsRes> => {
+  return HttpClient.get(`/discover`).then((body) => {
+    console.log(body);
+    var posts = body.data.posts as any[];
+    return {
+      posts: posts.map((post): GetPostRes => {
+        return {
+          title: post.title,
+          mediaURL: post.media_url,
+          postID: post.id,
           datePosted: post.date_posted,
           merchantName: post.merchant_name,
           mediaType: post.media_mimetype,
@@ -78,6 +98,7 @@ const MerchantService = {
   createPost,
   getPost,
   getPosts,
+  discover,
 };
 
 export default MerchantService;

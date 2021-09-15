@@ -3,6 +3,7 @@ import { Link, BrowserRouter as Router } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import App from "./components/App";
 import CreatePost from "./components/create";
+import DiscoverPage from "./components/discoverPage";
 import PostPage from "./components/postPage";
 import PostsPage from "./components/postsPage";
 
@@ -50,6 +51,11 @@ export default class Routes extends React.Component<IRoutesProps> {
                   routerProps={props}
                 />
               )}
+            />
+            <Route
+              exact
+              path="/discover"
+              render={(props) => <DiscoverPage routerProps={props} />}
             />
           </Switch>
         </div>
