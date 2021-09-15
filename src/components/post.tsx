@@ -85,6 +85,10 @@ export default class Post extends React.Component<PostProps> {
             />
           </div>
         )}
+        <div className="BelowPostMedia">
+          <div style={{ flex: 1 }}>5 likes 4 comments</div>
+          <div>10 orders placed</div>
+        </div>
       </div>
     );
   }
