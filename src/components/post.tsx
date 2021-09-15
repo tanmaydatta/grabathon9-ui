@@ -2,7 +2,7 @@ import moment from "moment";
 import * as React from "react";
 import ReactPlayer from "react-player";
 import "../css/post.css";
-import { AiFillHeart } from "react-icons/ai";
+import { AiFillHeart, AiTwotoneCheckCircle } from "react-icons/ai";
 import { IoChatbubbleOutline, IoPaperPlaneOutline } from "react-icons/io5";
 
 export interface PostProps {
@@ -25,12 +25,39 @@ export default class Post extends React.Component<PostProps> {
               <img src={this.props.logoURL} className="LogoImage" />
             </div>
             <div className="MerchantName">
-              <p>{this.props.merchantName}</p>
-            </div>
-          </div>
-          <div className="PostDateWrapper">
-            <div className="PostDate">
-              {moment(moment.utc(this.props.date).toDate()).local().fromNow()}
+              <div style={{ textAlign: "left" }}>{this.props.title}</div>
+              <div className="PostDate">
+                <div
+                  style={{
+                    display: "flex",
+                  }}
+                >
+                  <div style={{ textAlign: "left" }}>
+                    {this.props.merchantName}
+                  </div>{" "}
+                  <div
+                    style={{
+                      marginLeft: "2%",
+                      marginRight: "2%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <AiTwotoneCheckCircle
+                      size={
+                        "calc( 8px + (24 - 16) * (100vw - 400px) / (800 - 400) )"
+                      }
+                      style={{
+                        color: "grey",
+                      }}
+                    />
+                  </div>
+                  {moment(moment.utc(this.props.date).toDate())
+                    .local()
+                    .fromNow()}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -58,24 +85,6 @@ export default class Post extends React.Component<PostProps> {
             />
           </div>
         )}
-        <div className="BelowPostMedia">
-          <div className="Actions">
-            <AiFillHeart style={{ color: "#ed4956", margin: "1%" }} />
-            <IoChatbubbleOutline style={{ margin: "1%" }} />
-            <IoPaperPlaneOutline style={{ margin: "1%" }} />
-          </div>
-          <div className="PostTitle">
-            {this.props.merchantName}:
-            <span
-              style={{
-                marginLeft: "5px",
-                fontWeight: 500,
-              }}
-            >
-              {this.props.title}
-            </span>
-          </div>
-        </div>
       </div>
     );
   }
