@@ -1,0 +1,18 @@
+.CreatePost {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+
+.Title {
+  padding: 1%;
+  font-size: large;
+  margin-top: 2%;
+}
+
+.FileInput {
+  padding: 1%;
+  font-size: large;
+  margin-top: 2%;
+  width: 100%;
+}

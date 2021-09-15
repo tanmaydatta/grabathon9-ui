@@ -1,0 +1,79 @@
+.Post {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 100%;
+}
+
+.PostImage {
+  width: 100%;
+  height: 100%;
+  margin-top: 1%;
+}
+
+.PostTitle {
+  margin-top: 1%;
+  font-size: 60%;
+  font-weight: bold;
+}
+
+.PostDate {
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.PostMeta {
+  padding: 2%;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+}
+
+.MerchantNameWrapper {
+  font-size: 60%;
+  font-weight: bold;
+  display: flex;
+  flex-direction: row;
+  /* width: 150px; */
+}
+
+.LogoImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.LogoImageWrapper {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.BelowPostMedia {
+  flex-direction: column;
+  display: flex;
+  text-align: left;
+  justify-content: space-between;
+  margin: 10px;
+  margin-left: 20px;
+}
+
+.PostDateWrapper {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.MerchantName {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.Actions {
+  display: flex;
+  justify-content: left;
+}
