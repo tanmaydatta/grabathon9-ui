@@ -79,11 +79,13 @@ export default class DiscoverMerchant extends React.Component<
         <img
           style={{
             maxHeight: "40vh",
-            width: "100%",
+            width: "99%",
+            margin: "1% 0  0 0",
           }}
           src={this.state.merchant?.logoURL}
           alt={this.state.merchant?.logoURL}
         />
+
         <div
           style={{
             textAlign: "left",

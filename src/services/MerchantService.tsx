@@ -29,6 +29,7 @@ const createPost = async (req: CreatePostReq): Promise<CreatePostRes> => {
   const params = JSON.stringify({
     title: req.title,
     media_id: req.mediaID,
+    items: req.items,
   });
   return HttpClient.post(`/merchant/${req.merchantID}/post`, params).then(
     (body) => {
@@ -113,6 +114,7 @@ const getMenu = async (req: GetPostsReq): Promise<GetMenuRes> => {
           name: item.name,
           price: item.price,
           currency: item.currency,
+          description: item.description,
         };
       }),
     };
@@ -138,6 +140,7 @@ const getItemResFromBody = (items: any[]): GetItemRes[] => {
       name: item.name,
       price: item.price,
       currency: item.currency,
+      description: item.description,
     };
   });
 };

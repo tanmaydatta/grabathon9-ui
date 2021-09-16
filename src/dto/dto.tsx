@@ -10,6 +10,7 @@ export interface CreatePostReq {
   merchantID: number;
   mediaID: number;
   title: string;
+  items: number[];
 }
 
 export interface CreatePostRes {
@@ -55,6 +56,7 @@ export interface GetItemRes {
   name: string;
   currency: string;
   price: number;
+  description: string;
 }
 export interface GetMenuRes {
   items: GetItemRes[];

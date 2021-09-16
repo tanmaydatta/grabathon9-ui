@@ -4,6 +4,8 @@ import { RouterProps } from "react-router-dom";
 import "../css/createPost.css";
 import MerchantService from "../services/MerchantService";
 import { Redirect } from "react-router-dom";
+import Select from "react-select";
+import { itemClassName } from "react-horizontal-scrolling-menu/dist/constants";
 
 export interface CreatePostProps {
   merchantID: string;
@@ -19,6 +21,8 @@ export interface CreatePostState {
   success: boolean;
   loading: boolean;
   error: boolean;
+  itemOptions: any[];
+  selectedItems: number[];
 }
 
 export default class CreatePost extends React.Component<
@@ -36,10 +40,76 @@ export default class CreatePost extends React.Component<
       title: "",
       success: false,
       error: false,
+      itemOptions: [],
+      selectedItems: [],
     };
     this.buttonClick = this.buttonClick.bind(this);
     this.hiddenFileInput = React.createRef();
     this.onFileInputChange = this.onFileInputChange.bind(this);
+    this.onSelectChange = this.onSelectChange.bind(this);
+    this.onPostClick = this.onPostClick.bind(this);
+  }
+
+  onPostClick() {
+    console.log(this.state);
+    this.setState({
+      ...this.state,
+      loading: true,
+    });
+    MerchantService.uploadMedia({
+      file: this.state.file,
+    })
+      .then((res) => {
+        return MerchantService.createPost({
+          title: this.state.title,
+          merchantID: Number(this.props.merchantID),
+          mediaID: res.id,
+          items: this.state.selectedItems,
+        });
+      })
+      .then((res) => {
+        console.log(res);
+        this.setState({
+          ...this.state,
+          loading: false,
+          success: true,
+        });
+      })
+      .catch((e) => {
+        console.log("outer error", e);
+        this.setState({
+          ...this.state,
+          loading: false,
+          success: false,
+          error: true,
+        });
+      });
+  }
+
+  componentDidMount() {
+    MerchantService.getMenu({
+      merchantID: Number(this.props.merchantID),
+    })
+      .then((res) => {
+        this.setState({
+          ...this.state,
+          itemOptions: res.items.map((item, i) => {
+            return {
+              value: item.id,
+              label: item.name,
+            };
+          }),
+        });
+      })
+      .catch((err) => {
+        console.log("error in menu", err);
+        this.setState({
+          ...this.state,
+          loading: false,
+          success: false,
+          error: true,
+        });
+      });
   }
 
   buttonClick = () => {
@@ -66,39 +136,18 @@ export default class CreatePost extends React.Component<
 
   onSubmit = (e: any) => {
     if (e.key === "Enter") {
-      this.setState({
-        ...this.state,
-        loading: true,
-      });
-      MerchantService.uploadMedia({
-        file: this.state.file,
-      })
-        .then((res) => {
-          return MerchantService.createPost({
-            title: this.state.title,
-            merchantID: Number(this.props.merchantID),
-            mediaID: res.id,
-          });
-        })
-        .then((res) => {
-          console.log(res);
-          this.setState({
-            ...this.state,
-            loading: false,
-            success: true,
-          });
-        })
-        .catch((e) => {
-          console.log("outer error", e);
-          this.setState({
-            ...this.state,
-            loading: false,
-            success: false,
-            error: true,
-          });
-        });
+      this.onPostClick();
     }
   };
+
+  onSelectChange(e: any) {
+    this.setState({
+      ...this.state,
+      selectedItems: e.map((item: any) => {
+        return item.value;
+      }),
+    });
+  }
 
   public render() {
     return (
@@ -160,6 +209,36 @@ export default class CreatePost extends React.Component<
                 onKeyPress={this.onSubmit}
                 className="Title"
               ></input>
+              <div
+                style={{
+                  margin: "2% 0 0 0",
+                }}
+              >
+                <Select
+                  isMulti
+                  isClearable
+                  placeholder="Select items ..."
+                  name="colors"
+                  options={this.state.itemOptions}
+                  onChange={this.onSelectChange}
+                />
+              </div>
+              <div
+                onClick={this.onPostClick}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  padding: "2% 0 2% 0",
+                  margin: "2% 0 2% 0",
+                  border: "1px solid grey",
+                  borderRadius: "2%",
+                  background: "green",
+                  color: "white",
+                }}
+              >
+                Post
+              </div>
             </div>
           </div>
         )}

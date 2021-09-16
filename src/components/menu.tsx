@@ -30,9 +30,7 @@ export default class Menu extends React.Component<MenuProps> {
                     display: "flex",
                   }}
                 >
-                  <div style={{ textAlign: "left" }}>
-                    Some description about the item
-                  </div>{" "}
+                  <div style={{ textAlign: "left" }}>{item.description}</div>{" "}
                 </div>
               </div>
               <div
