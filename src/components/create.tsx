@@ -87,6 +87,7 @@ export default class CreatePost extends React.Component<
   }
 
   componentDidMount() {
+    console.log(this.state);
     MerchantService.getMenu({
       merchantID: Number(this.props.merchantID),
     })
@@ -155,7 +156,7 @@ export default class CreatePost extends React.Component<
         {this.state.loading && <div className="App App-header">Loading...</div>}
         {!this.state.loading && this.state.error && (
           <div className="App App-header">
-            Error occured, please check console
+            Error occurred, please check console
           </div>
         )}
         {!this.state.loading && !this.state.error && (

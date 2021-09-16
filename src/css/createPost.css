@@ -1,7 +1,7 @@
 .CreatePost {
   display: flex;
   flex-direction: column;
-  width: 60%;
+  width: 90%;
 }
 
 .Title {
