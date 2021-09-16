@@ -62,3 +62,13 @@ export interface GetMenuRes {
 export interface GetMenuReq {
   merchantID: number;
 }
+
+export interface GetMerchantRes {
+  logoURL: string;
+  name: string;
+  id: number;
+}
+
+export interface GetMerchantReq {
+  id: number;
+}

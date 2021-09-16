@@ -4,6 +4,8 @@ import {
   CreatePostRes,
   GetItemRes,
   GetMenuRes,
+  GetMerchantReq,
+  GetMerchantRes,
   GetPostReq,
   GetPostRes,
   GetPostsReq,
@@ -114,6 +116,16 @@ const getMenu = async (req: GetPostsReq): Promise<GetMenuRes> => {
   });
 };
 
+const getMerchant = async (req: GetMerchantReq): Promise<GetMerchantRes> => {
+  return HttpClient.get(`/merchant/${req.id}`).then((body) => {
+    console.log(body.data);
+    return {
+      id: req.id,
+      name: body.data.name,
+      logoURL: body.data.logo_url,
+    };
+  });
+};
 const MerchantService = {
   uploadMedia,
   createPost,
@@ -121,6 +133,7 @@ const MerchantService = {
   getPosts,
   discover,
   getMenu,
+  getMerchant,
 };
 
 export default MerchantService;

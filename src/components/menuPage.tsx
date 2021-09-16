@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouterProps } from "react-router-dom";
-import { GetItemRes } from "../dto/dto";
+import { GetItemRes, GetMerchantRes } from "../dto/dto";
 import MerchantService from "../services/MerchantService";
 import Post from "./post";
 import "../css/postsPage.css";
@@ -11,6 +11,7 @@ interface MenuPageState {
   loading: boolean;
   success: boolean;
   posts: GetItemRes[];
+  merchant?: GetMerchantRes;
 }
 
 interface MenuPageProps {
@@ -32,6 +33,24 @@ export default class MenuPage extends React.Component<
   }
 
   componentDidMount() {
+    MerchantService.getMerchant({
+      id: Number(this.props.merchantID),
+    })
+      .then((resp) => {
+        this.setState({
+          ...this.state,
+          merchant: resp,
+        });
+      })
+      .catch((e) => {
+        console.log("setting state in fail");
+        console.log(e);
+        this.setState({
+          ...this.state,
+          success: false,
+          loading: false,
+        });
+      });
     MerchantService.getMenu({
       merchantID: Number(this.props.merchantID),
     })
@@ -61,12 +80,32 @@ export default class MenuPage extends React.Component<
     };
     return (
       <div className="App PostsWrapper">
-        <TabBar
-          routerProps={this.props.routerProps}
-          onTabClick={[(routerProps) => {}, discoverClick]}
-          tabs={["Menu", "Discover"]}
-          selected={0}
+        <img
+          style={{
+            maxHeight: "40vh",
+            width: "100%",
+          }}
+          src={this.state.merchant?.logoURL}
         />
+        <div
+          style={{
+            textAlign: "left",
+            margin: "0 0 1% 1%",
+            fontSize: "calc(20px + (24 - 16) * (100vw - 400px) / (800 - 400))",
+            fontWeight: "bold",
+          }}
+        >
+          {this.state.merchant?.name}
+        </div>
+
+        {!state.loading && state.success && (
+          <TabBar
+            routerProps={this.props.routerProps}
+            onTabClick={[(routerProps) => {}, discoverClick]}
+            tabs={["Menu", "Discover"]}
+            selected={0}
+          />
+        )}
         {state.loading && <div>Loading ...</div>}
         {!this.state.loading && !state.success && (
           <div>Error occurred. Check console</div>
