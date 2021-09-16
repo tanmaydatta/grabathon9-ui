@@ -71,6 +71,8 @@ export default class DiscoverPage extends React.Component<
                   date={post.datePosted}
                   postID={post.postID}
                   title={post.title}
+                  merchantID={post.merchantID ? post.merchantID : 0}
+                  routerProps={this.props.routerProps}
                 />
               </div>
             );

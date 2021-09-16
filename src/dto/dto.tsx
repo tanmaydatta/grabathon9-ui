@@ -29,6 +29,7 @@ export interface GetPostRes {
   logoUrl: string;
   merchantName: string;
   mediaType: string;
+  merchantID?: number;
 }
 
 export interface GetPostsReq {

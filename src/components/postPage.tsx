@@ -82,6 +82,8 @@ export default class PostPage extends React.Component<
             date={post.datePosted}
             postID={post.postID}
             title={post.title}
+            merchantID={this.props.merchantID}
+            routerProps={this.props.routerProps}
           />
         </div>
       </div>

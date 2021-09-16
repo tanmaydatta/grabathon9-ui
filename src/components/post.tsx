@@ -3,6 +3,7 @@ import * as React from "react";
 import ReactPlayer from "react-player";
 import "../css/post.css";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
+import { RouterProps } from "react-router-dom";
 
 export interface PostProps {
   mediaURL: string;
@@ -12,6 +13,8 @@ export interface PostProps {
   merchantName: string;
   logoURL: string;
   mediaType: string;
+  routerProps: RouterProps;
+  merchantID: string;
 }
 
 export default class Post extends React.Component<PostProps> {
@@ -21,7 +24,11 @@ export default class Post extends React.Component<PostProps> {
         <div className="PostMeta">
           <div className="MerchantNameWrapper">
             <div className="LogoImageWrapper">
-              <img src={this.props.logoURL} className="LogoImage" />
+              <img
+                src={this.props.logoURL}
+                className="LogoImage"
+                alt={this.props.logoURL}
+              />
             </div>
             <div className="MerchantName">
               <div style={{ textAlign: "left" }}>{this.props.title}</div>
@@ -67,7 +74,12 @@ export default class Post extends React.Component<PostProps> {
             onError={(e) => {
               console.log(e);
             }}
-            alt=""
+            onClick={() => {
+              this.props.routerProps.history.push(
+                `/merchant/${this.props.merchantID}/post/${this.props.postID}`
+              );
+            }}
+            alt={this.props.mediaURL}
           />
         )}
         {!this.props.mediaType.startsWith("image") && (
@@ -80,7 +92,6 @@ export default class Post extends React.Component<PostProps> {
               onError={(e) => {
                 console.log(e);
               }}
-              // alt=""
             />
           </div>
         )}

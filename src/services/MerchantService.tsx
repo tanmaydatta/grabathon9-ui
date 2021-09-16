@@ -87,6 +87,7 @@ const discover = async (): Promise<GetPostsRes> => {
           merchantName: post.merchant_name,
           mediaType: post.media_mimetype,
           logoUrl: post.logo_url,
+          merchantID: post.merchant_id,
         };
       }),
     };
