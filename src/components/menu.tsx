@@ -4,30 +4,29 @@ import ReactPlayer from "react-player";
 import "../css/post.css";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
 import { RouterProps } from "react-router-dom";
+import { GetItemRes } from "../dto/dto";
 
 export interface MenuProps {
-  mediaURL: string;
-  id: number;
-  name: string;
   routerProps: RouterProps;
-  merchantID: string;
+  item: GetItemRes;
 }
 
 export default class Menu extends React.Component<MenuProps> {
   public render() {
+    const item = this.props.item;
     return (
       <div className="Post">
         <div className="PostMeta">
           <div className="MerchantNameWrapper">
             <div className="LogoImageWrapper">
               <img
-                src={this.props.mediaURL}
+                src={item.mediaURL}
                 className="LogoImage"
-                alt={this.props.mediaURL}
+                alt={item.mediaURL}
               />
             </div>
             <div className="MerchantName">
-              <div style={{ textAlign: "left" }}>{this.props.name}</div>
+              <div style={{ textAlign: "left" }}>{item.name}</div>
               <div className="PostDate">
                 <div
                   style={{
@@ -50,7 +49,9 @@ export default class Menu extends React.Component<MenuProps> {
                     display: "flex",
                   }}
                 >
-                  <div style={{ textAlign: "left" }}>12 SGD</div>{" "}
+                  <div style={{ textAlign: "left" }}>
+                    {item.price} {item.currency}
+                  </div>{" "}
                 </div>
               </div>
             </div>

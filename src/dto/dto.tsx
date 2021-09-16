@@ -52,6 +52,8 @@ export interface GetItemRes {
   id: number;
   mediaURL: string;
   name: string;
+  currency: string;
+  price: number;
 }
 export interface GetMenuRes {
   items: GetItemRes[];

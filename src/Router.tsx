@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, BrowserRouter as Router } from "react-router-dom";
+import { Link, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import App from "./components/App";
 import CreatePost from "./components/create";
@@ -65,6 +65,15 @@ export default class Routes extends React.Component<IRoutesProps> {
                 <MenuPage
                   routerProps={props}
                   merchantID={props.match.params.merchantID}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/merchant/:merchantID/home"
+              render={(props) => (
+                <Redirect
+                  to={`/merchant/${props.match.params.merchantID}/menu`}
                 />
               )}
             />

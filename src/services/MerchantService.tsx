@@ -106,6 +106,8 @@ const getMenu = async (req: GetPostsReq): Promise<GetMenuRes> => {
           id: item.id,
           mediaURL: item.media_url,
           name: item.name,
+          price: item.price,
+          currency: item.currency,
         };
       }),
     };

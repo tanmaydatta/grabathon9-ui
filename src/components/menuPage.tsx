@@ -78,11 +78,8 @@ export default class MenuPage extends React.Component<
               <div key={i} className="PostCard">
                 <Menu
                   key={post.mediaURL}
-                  mediaURL={post.mediaURL}
-                  id={post.id}
-                  name={post.name}
-                  merchantID={this.props.merchantID}
                   routerProps={this.props.routerProps}
+                  item={post}
                 />
               </div>
             );
