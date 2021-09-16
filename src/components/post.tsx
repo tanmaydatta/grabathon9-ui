@@ -38,27 +38,6 @@ export default class Post extends React.Component<PostProps> {
                     display: "flex",
                   }}
                 >
-                  <div style={{ textAlign: "left" }}>
-                    {this.props.merchantName}
-                  </div>{" "}
-                  <div
-                    style={{
-                      marginLeft: "2%",
-                      marginRight: "2%",
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                    }}
-                  >
-                    <AiTwotoneCheckCircle
-                      size={
-                        "calc( 8px + (24 - 16) * (100vw - 400px) / (800 - 400) )"
-                      }
-                      style={{
-                        color: "grey",
-                      }}
-                    />
-                  </div>
                   {moment(moment.utc(this.props.date).toDate())
                     .local()
                     .fromNow()}
