@@ -5,6 +5,8 @@ import MerchantService from "../services/MerchantService";
 import Post from "./post";
 import "../css/postsPage.css";
 import TabBar from "./tabBar";
+import Menu from "./menu";
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
 
 interface PostsPageState {
   loading: boolean;
@@ -117,19 +119,63 @@ export default class PostsPage extends React.Component<
           state.success &&
           state.posts.map((post, i) => {
             return (
-              <div key={i} className="PostCard">
-                <Post
-                  key={post.mediaURL}
-                  mediaType={post.mediaType}
-                  logoURL={post.logoUrl}
-                  merchantName={post.merchantName}
-                  mediaURL={post.mediaURL}
-                  date={post.datePosted}
-                  postID={post.postID}
-                  title={post.title}
-                  merchantID={this.props.merchantID}
-                  routerProps={this.props.routerProps}
-                />
+              <div>
+                <div key={i} className="PostCard">
+                  <Post
+                    key={post.mediaURL}
+                    mediaType={post.mediaType}
+                    logoURL={post.logoUrl}
+                    merchantName={post.merchantName}
+                    mediaURL={post.mediaURL}
+                    date={post.datePosted}
+                    postID={post.postID}
+                    title={post.title}
+                    merchantID={this.props.merchantID}
+                    routerProps={this.props.routerProps}
+                  />
+                </div>
+                <div key={`menuitem${i}`}>
+                  <ScrollMenu LeftArrow={{}} RightArrow={{}}>
+                    <div
+                      style={{
+                        width: "80vw",
+                        marginLeft: "1%",
+                      }}
+                      className="PostCard"
+                    >
+                      <Menu
+                        routerProps={this.props.routerProps}
+                        item={{
+                          currency: "SGD",
+                          id: 1,
+                          mediaURL:
+                            "https://grab-discover.s3.ap-southeast-1.amazonaws.com/fc9b49aa19f746189a565d61e2d487ce/cheese-burger.jpeg",
+                          name: "cheese burger",
+                          price: 10,
+                        }}
+                      />
+                    </div>
+                    <div
+                      className="PostCard"
+                      style={{
+                        width: "80vw",
+                        marginLeft: "1%",
+                      }}
+                    >
+                      <Menu
+                        routerProps={this.props.routerProps}
+                        item={{
+                          currency: "SGD",
+                          id: 1,
+                          mediaURL:
+                            "https://grab-discover.s3.ap-southeast-1.amazonaws.com/fc9b49aa19f746189a565d61e2d487ce/cheese-burger.jpeg",
+                          name: "cheese burger",
+                          price: 10,
+                        }}
+                      />
+                    </div>
+                  </ScrollMenu>
+                </div>
               </div>
             );
           })}

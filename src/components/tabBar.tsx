@@ -23,6 +23,7 @@ export default class TabBar extends React.Component<TabBarProps> {
           var color = i == this.props.selected ? "black" : "grey";
           return (
             <div
+              key={i}
               style={{
                 flex: 1,
                 border: "black",

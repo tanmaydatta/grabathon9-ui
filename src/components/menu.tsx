@@ -21,7 +21,7 @@ export default class Menu extends React.Component<MenuProps> {
             <div className="LogoImageWrapper">
               <img
                 src={item.mediaURL}
-                className="LogoImage"
+                className="MenuImage"
                 alt={item.mediaURL}
               />
             </div>

@@ -4,6 +4,7 @@ import ReactPlayer from "react-player";
 import "../css/post.css";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
 import { RouterProps } from "react-router-dom";
+import Menu from "./menu";
 
 export interface PostProps {
   mediaURL: string;

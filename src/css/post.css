@@ -50,6 +50,12 @@
   border-radius: 10%;
 }
 
+.MenuImage {
+  width: calc(60px + (24 - 16) * (100vw - 400px) / (800 - 400));
+  height: calc(60px + (24 - 16) * (100vw - 400px) / (800 - 400));
+  border-radius: 10%;
+}
+
 .LogoImageWrapper {
   flex-direction: column;
   display: flex;
