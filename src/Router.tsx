@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, BrowserRouter as Router, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
 import { Route, Switch } from "react-router-dom";
 import App from "./components/App";
 import CreatePost from "./components/create";
@@ -9,6 +9,8 @@ import PostPage from "./components/postPage";
 import PostsPage from "./components/postsPage";
 import DiscoverMerchant from "./components/discoverMerchant";
 import DiscoverPostPage from "./components/discoverPostPage";
+import MexEntryHome from "./components/mexEntryHome";
+import MexEntryOverview from "./components/mexEntryOverview";
 
 export interface IRoutesProps {}
 
@@ -17,11 +19,6 @@ export default class Routes extends React.Component<IRoutesProps> {
     return (
       <Router>
         <div>
-          <nav hidden>
-            <Link to="/">Home</Link>
-            <Link to="/page1">Page1`</Link>
-            <Link to="/page2">Page2</Link>
-          </nav>
           <Switch>
             <Route exact path="/" component={App} />
             <Route
@@ -97,6 +94,26 @@ export default class Routes extends React.Component<IRoutesProps> {
               render={(props) => (
                 <Redirect
                   to={`/pax/merchant/${props.match.params.merchantID}/menu`}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/merchant/:merchantID/home"
+              render={(props) => (
+                <MexEntryHome
+                  merchantID={props.match.params.merchantID}
+                  routerProps={props}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/merchant/:merchantID/overview"
+              render={(props) => (
+                <MexEntryOverview
+                  merchantID={props.match.params.merchantID}
+                  routerProps={props}
                 />
               )}
             />

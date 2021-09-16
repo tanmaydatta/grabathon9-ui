@@ -5,7 +5,6 @@ import "../css/createPost.css";
 import MerchantService from "../services/MerchantService";
 import { Redirect } from "react-router-dom";
 import Select from "react-select";
-import { itemClassName } from "react-horizontal-scrolling-menu/dist/constants";
 import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export interface CreatePostProps {
