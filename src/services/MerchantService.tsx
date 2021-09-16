@@ -1,5 +1,7 @@
 import { HttpFileClient, HttpClient } from "../http-common";
 import {
+  BoostPostReq,
+  BoostPostRes,
   CreatePostReq,
   CreatePostRes,
   GetItemRes,
@@ -54,6 +56,7 @@ const getPost = async (req: GetPostReq): Promise<GetPostRes> => {
         mediaType: body.data.media_mimetype,
         logoUrl: body.data.logo_url,
         items: getItemResFromBody(body.data.items),
+        boosted: body.data.is_boosted,
       };
     }
   );
@@ -74,6 +77,7 @@ const getPosts = async (req: GetPostsReq): Promise<GetPostsRes> => {
           mediaType: post.media_mimetype,
           logoUrl: post.logo_url,
           items: getItemResFromBody(post.items),
+          boosted: post.is_boosted,
         };
       }),
     };
@@ -96,6 +100,7 @@ const discover = async (): Promise<GetPostsRes> => {
           logoUrl: post.logo_url,
           merchantID: post.merchant_id,
           items: getItemResFromBody(post.items),
+          boosted: post.is_boosted,
         };
       }),
     };
@@ -144,6 +149,19 @@ const getItemResFromBody = (items: any[]): GetItemRes[] => {
     };
   });
 };
+
+const boostPost = async (req: BoostPostReq): Promise<BoostPostRes> => {
+  const params = JSON.stringify({
+    days: req.days,
+  });
+  return HttpClient.post(`/post/${req.postID}/boost`, params).then((body) => {
+    console.log(body.data);
+    return {
+      success: body.data.success,
+    };
+  });
+};
+
 const MerchantService = {
   uploadMedia,
   createPost,
@@ -152,6 +170,7 @@ const MerchantService = {
   discover,
   getMenu,
   getMerchant,
+  boostPost,
 };
 
 export default MerchantService;

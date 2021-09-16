@@ -91,3 +91,19 @@
   display: flex;
   justify-content: left;
 }
+
+.Boost {
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+  width: 20vw;
+  padding: 2% 0 2% 0;
+}
+
+.Boosted {
+  border: black;
+  border-style: solid;
+  border-width: 1px;
+  width: 20vw;
+  padding: 2% 0 2% 0;
+}

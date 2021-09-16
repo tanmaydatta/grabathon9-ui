@@ -7,3 +7,31 @@
 .PostsWrapper {
   padding-bottom: 5%;
 }
+
+.Container {
+  width: 100%;
+  height: 100%;
+  /* position: relative; */
+}
+
+.Behind {
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
+  top: 0;
+  left: 0;
+}
+
+.Forward {
+  top: 0;
+  left: 0;
+  position: -webkit-sticky; /* Safari */
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  z-index: 10;
+}

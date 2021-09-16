@@ -32,6 +32,7 @@ export interface GetPostRes {
   mediaType: string;
   merchantID?: number;
   items: GetItemRes[];
+  boosted: boolean;
 }
 
 export interface GetPostsReq {
@@ -74,4 +75,13 @@ export interface GetMerchantRes {
 
 export interface GetMerchantReq {
   id: number;
+}
+
+export interface BoostPostReq {
+  postID: number;
+  days: number;
+}
+
+export interface BoostPostRes {
+  success: boolean;
 }

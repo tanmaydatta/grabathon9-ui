@@ -15,9 +15,17 @@ export interface PostProps {
   mediaType: string;
   routerProps: RouterProps;
   merchantID: string;
+  boosted: boolean;
+  onBoostClicked: () => void;
 }
 
-export default class Post extends React.Component<PostProps> {
+export interface PostState {}
+
+export default class Post extends React.Component<PostProps, PostState> {
+  constructor(props: PostProps) {
+    super(props);
+    this.setState({});
+  }
   public render() {
     return (
       <div className="Post">
@@ -45,6 +53,7 @@ export default class Post extends React.Component<PostProps> {
               </div>
             </div>
             <div
+              onClick={this.props.onBoostClicked}
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -56,16 +65,8 @@ export default class Post extends React.Component<PostProps> {
                   "calc(12px + (24 - 16) * (100vw - 400px) / (800 - 400))",
               }}
             >
-              <div
-                style={{
-                  border: "black",
-                  borderStyle: "solid",
-                  borderWidth: "1px",
-                  width: "20vw",
-                  padding: "1% 0 1% 0",
-                }}
-              >
-                Boost Post
+              <div className={this.props.boosted ? "Boosted" : "Boost"}>
+                {this.props.boosted ? "Boosted" : "Boost Post"}
               </div>
             </div>
           </div>

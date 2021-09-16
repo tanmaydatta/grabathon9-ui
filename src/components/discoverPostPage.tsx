@@ -37,6 +37,7 @@ export default class DiscoverPostPage extends React.Component<
         datePosted: new Date(),
         postID: 0,
         items: [],
+        boosted: false,
       },
     };
   }

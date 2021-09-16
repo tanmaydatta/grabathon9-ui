@@ -6,6 +6,7 @@ import Post from "./post";
 import "../css/postPage.css";
 import { GetPostRes } from "../dto/dto";
 import ItemsBelowPost from "./itemsBelowPost";
+import boostPopup from "./boostPopup";
 
 interface PostPageProps {
   postID: string;
@@ -17,6 +18,10 @@ interface PostPageState {
   loading: boolean;
   success: boolean;
   post: GetPostRes;
+  boostClicked: boolean;
+  boostSuccess: boolean;
+  amount: number;
+  days: string;
 }
 
 export default class PostPage extends React.Component<
@@ -28,8 +33,13 @@ export default class PostPage extends React.Component<
     this.state = {
       loading: true,
       success: true,
+      boostClicked: false,
+      boostSuccess: true,
+      amount: 0,
+      days: "",
       post: {
         mediaType: "",
+        boosted: false,
         mediaURL: "",
         logoUrl: "",
         title: "",
@@ -70,28 +80,83 @@ export default class PostPage extends React.Component<
     const state = this.state;
     const post = state.post;
     return (
-      <div className="App">
-        <div hidden={!state.loading}>Loading ...</div>
-        <div hidden={state.loading || state.success}>
-          Error occurred. Check console
-        </div>
-        <div className="PostPage" hidden={state.loading || !state.success}>
-          <Post
-            mediaType={post.mediaType}
-            logoURL={post.logoUrl}
-            merchantName={post.merchantName}
-            mediaURL={post.mediaURL}
-            date={post.datePosted}
-            postID={post.postID}
-            title={post.title}
-            merchantID={this.props.merchantID}
+      <div className="Container">
+        <div className="App">
+          <div hidden={!state.loading}>Loading ...</div>
+          <div hidden={state.loading || state.success}>
+            Error occurred. Check console
+          </div>
+          <div className="PostPage" hidden={state.loading || !state.success}>
+            <Post
+              boosted={post.boosted}
+              mediaType={post.mediaType}
+              logoURL={post.logoUrl}
+              merchantName={post.merchantName}
+              mediaURL={post.mediaURL}
+              date={post.datePosted}
+              postID={post.postID}
+              title={post.title}
+              merchantID={this.props.merchantID}
+              routerProps={this.props.routerProps}
+              onBoostClicked={() => {
+                if (!post.boosted) {
+                  this.setState({
+                    ...this.state,
+                    boostClicked: true,
+                  });
+                }
+              }}
+            />
+          </div>
+          <ItemsBelowPost
+            items={post.items}
             routerProps={this.props.routerProps}
           />
         </div>
-        <ItemsBelowPost
-          items={post.items}
-          routerProps={this.props.routerProps}
-        />
+        {
+          this.state.boostClicked &&
+            boostPopup(
+              this.state.boostSuccess
+                ? `This will cost you ${this.state.amount} SGD`
+                : `Some error occurred, please check console`,
+              () => {
+                MerchantService.boostPost({
+                  postID: post.postID,
+                  days: Number(this.state.days),
+                })
+                  .then(() => {
+                    this.setState({
+                      ...this.state,
+                      boostClicked: false,
+                    });
+                  })
+                  .catch(() => {
+                    this.setState({
+                      ...this.state,
+                      boostSuccess: false,
+                    });
+                  });
+              },
+              (e) => {
+                this.setState({
+                  ...this.state,
+                  days: e.target.value,
+                  amount: e.target.value * 1.2,
+                });
+              },
+              () => {
+                this.setState({
+                  ...this.state,
+                  boostClicked: false,
+                });
+              }
+            )
+          // <BoostPopup
+          //   onBoost={() => {
+          //     alert(this.state.posts[this.state.postIndex].title);
+          //   }}
+          // />
+        }
       </div>
     );
   }
