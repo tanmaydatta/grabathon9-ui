@@ -4,7 +4,6 @@ import ReactPlayer from "react-player";
 import "../css/post.css";
 import { AiTwotoneCheckCircle } from "react-icons/ai";
 import { RouterProps } from "react-router-dom";
-import Menu from "./menu";
 
 export interface PostProps {
   mediaURL: string;
@@ -64,6 +63,30 @@ export default class Post extends React.Component<PostProps> {
                     .local()
                     .fromNow()}
                 </div>
+              </div>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                marginRight: "1%",
+                fontWeight: "normal",
+                fontSize:
+                  "calc(12px + (24 - 16) * (100vw - 400px) / (800 - 400))",
+              }}
+            >
+              <div
+                style={{
+                  border: "black",
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  width: "20vw",
+                  padding: "1% 0 1% 0",
+                }}
+              >
+                Boost Post
               </div>
             </div>
           </div>

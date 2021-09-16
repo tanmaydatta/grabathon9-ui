@@ -1,8 +1,5 @@
-import moment from "moment";
 import * as React from "react";
-import ReactPlayer from "react-player";
 import "../css/post.css";
-import { AiTwotoneCheckCircle } from "react-icons/ai";
 import { RouterProps } from "react-router-dom";
 import { GetItemRes } from "../dto/dto";
 

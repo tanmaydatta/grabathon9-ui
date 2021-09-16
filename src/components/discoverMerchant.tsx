@@ -1,28 +1,28 @@
 import * as React from "react";
 import { RouterProps } from "react-router-dom";
-import { GetItemRes, GetMerchantRes } from "../dto/dto";
+import { GetMerchantRes, GetPostRes } from "../dto/dto";
 import MerchantService from "../services/MerchantService";
-import "../css/postsPage.css";
-import Menu from "./menu";
 import TabBar from "./tabBar";
+import DiscoverPost from "./discoverPost";
+import ItemsBelowPost from "./itemsBelowPost";
 
-interface MenuPageState {
+interface DiscoverMerchantState {
   loading: boolean;
   success: boolean;
-  posts: GetItemRes[];
+  posts: GetPostRes[];
   merchant?: GetMerchantRes;
 }
 
-interface MenuPageProps {
+interface DiscoverMerchantProps {
   merchantID: string;
   routerProps: RouterProps;
 }
 
-export default class MenuPage extends React.Component<
-  MenuPageProps,
-  MenuPageState
+export default class DiscoverMerchant extends React.Component<
+  DiscoverMerchantProps,
+  DiscoverMerchantState
 > {
-  constructor(props: MenuPageProps) {
+  constructor(props: DiscoverMerchantProps) {
     super(props);
     this.state = {
       success: true,
@@ -50,7 +50,7 @@ export default class MenuPage extends React.Component<
           loading: false,
         });
       });
-    MerchantService.getMenu({
+    MerchantService.getPosts({
       merchantID: Number(this.props.merchantID),
     })
       .then((resp) => {
@@ -59,7 +59,7 @@ export default class MenuPage extends React.Component<
           ...this.state,
           success: true,
           loading: false,
-          posts: resp.items,
+          posts: resp.posts,
         });
       })
       .catch((e) => {
@@ -74,9 +74,6 @@ export default class MenuPage extends React.Component<
   }
   public render() {
     const state = this.state;
-    const discoverClick = (routerProps: RouterProps) => {
-      routerProps.history.push(`/pax/merchant/${this.props.merchantID}/posts`);
-    };
     return (
       <div className="App PostsWrapper">
         <img
@@ -101,9 +98,16 @@ export default class MenuPage extends React.Component<
         {!state.loading && state.success && (
           <TabBar
             routerProps={this.props.routerProps}
-            onTabClick={[(routerProps) => {}, discoverClick]}
+            onTabClick={[
+              (routerProps) => {
+                routerProps.history.push(
+                  `/pax/merchant/${this.props.merchantID}/menu`
+                );
+              },
+              (routerProps) => {},
+            ]}
             tabs={["Menu", "Discover"]}
-            selected={0}
+            selected={1}
           />
         )}
         {state.loading && <div>Loading ...</div>}
@@ -114,11 +118,25 @@ export default class MenuPage extends React.Component<
           state.success &&
           state.posts.map((post, i) => {
             return (
-              <div key={i} className="PostCard">
-                <Menu
-                  key={post.mediaURL}
+              <div key={i}>
+                <div className="PostCard">
+                  <DiscoverPost
+                    key={post.mediaURL}
+                    mediaType={post.mediaType}
+                    logoURL={post.logoUrl}
+                    merchantName={post.merchantName}
+                    mediaURL={post.mediaURL}
+                    date={post.datePosted}
+                    postID={post.postID}
+                    title={post.title}
+                    merchantID={this.props.merchantID}
+                    routerProps={this.props.routerProps}
+                  />
+                </div>
+                <ItemsBelowPost
+                  key={`menuitem${i}`}
+                  items={post.items}
                   routerProps={this.props.routerProps}
-                  item={post}
                 />
               </div>
             );

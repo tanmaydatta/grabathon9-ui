@@ -2,28 +2,28 @@ import * as React from "react";
 import { RouterProps } from "react-router-dom";
 import "../css/App.css";
 import MerchantService from "../services/MerchantService";
-import Post from "./post";
 import "../css/postPage.css";
 import { GetPostRes } from "../dto/dto";
+import DiscoverPost from "./discoverPost";
 import ItemsBelowPost from "./itemsBelowPost";
 
-interface PostPageProps {
+interface DiscoverPostPageProps {
   postID: string;
   merchantID: string;
   routerProps: RouterProps;
 }
 
-interface PostPageState {
+interface DiscoverPostPageState {
   loading: boolean;
   success: boolean;
   post: GetPostRes;
 }
 
-export default class PostPage extends React.Component<
-  PostPageProps,
-  PostPageState
+export default class DiscoverPostPage extends React.Component<
+  DiscoverPostPageProps,
+  DiscoverPostPageState
 > {
-  constructor(props: PostPageProps) {
+  constructor(props: DiscoverPostPageProps) {
     super(props);
     this.state = {
       loading: true,
@@ -75,8 +75,11 @@ export default class PostPage extends React.Component<
         <div hidden={state.loading || state.success}>
           Error occurred. Check console
         </div>
-        <div className="PostPage" hidden={state.loading || !state.success}>
-          <Post
+        <div
+          className="DiscoverPostPage"
+          hidden={state.loading || !state.success}
+        >
+          <DiscoverPost
             mediaType={post.mediaType}
             logoURL={post.logoUrl}
             merchantName={post.merchantName}

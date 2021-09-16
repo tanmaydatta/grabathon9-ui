@@ -7,6 +7,8 @@ import DiscoverPage from "./components/discoverPage";
 import MenuPage from "./components/menuPage";
 import PostPage from "./components/postPage";
 import PostsPage from "./components/postsPage";
+import DiscoverMerchant from "./components/discoverMerchant";
+import DiscoverPostPage from "./components/discoverPostPage";
 
 export interface IRoutesProps {}
 
@@ -45,6 +47,17 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
+              path="/pax/merchant/:merchantID/post/:postID"
+              render={(props) => (
+                <DiscoverPostPage
+                  merchantID={props.match.params.merchantID}
+                  postID={props.match.params.postID}
+                  routerProps={props}
+                />
+              )}
+            />
+            <Route
+              exact
               path="/merchant/:merchantID/posts"
               render={(props) => (
                 <PostsPage
@@ -60,7 +73,7 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/merchant/:merchantID/menu"
+              path="/pax/merchant/:merchantID/menu"
               render={(props) => (
                 <MenuPage
                   routerProps={props}
@@ -70,10 +83,20 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/merchant/:merchantID/home"
+              path="/pax/merchant/:merchantID/posts"
+              render={(props) => (
+                <DiscoverMerchant
+                  routerProps={props}
+                  merchantID={props.match.params.merchantID}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/pax/merchant/:merchantID/home"
               render={(props) => (
                 <Redirect
-                  to={`/merchant/${props.match.params.merchantID}/menu`}
+                  to={`/pax/merchant/${props.match.params.merchantID}/menu`}
                 />
               )}
             />

@@ -5,8 +5,7 @@ import MerchantService from "../services/MerchantService";
 import Post from "./post";
 import "../css/postsPage.css";
 import TabBar from "./tabBar";
-import Menu from "./menu";
-import { ScrollMenu } from "react-horizontal-scrolling-menu";
+import ItemsBelowPost from "./itemsBelowPost";
 
 interface PostsPageState {
   loading: boolean;
@@ -78,37 +77,20 @@ export default class PostsPage extends React.Component<
     const state = this.state;
     return (
       <div className="App PostsWrapper">
-        <img
-          style={{
-            maxHeight: "40vh",
-            width: "100%",
-          }}
-          src={this.state.merchant?.logoURL}
-        />
-        <div
-          style={{
-            textAlign: "left",
-            margin: "0 0 1% 1%",
-            fontSize: "calc(20px + (24 - 16) * (100vw - 400px) / (800 - 400))",
-            fontWeight: "bold",
-          }}
-        >
-          {this.state.merchant?.name}
-        </div>
-
         {!state.loading && state.success && (
           <TabBar
             routerProps={this.props.routerProps}
             onTabClick={[
+              (routerProps) => {},
+              (routerProps) => {},
               (routerProps) => {
                 routerProps.history.push(
-                  `/merchant/${this.props.merchantID}/menu`
+                  `/merchant/${this.props.merchantID}/posts`
                 );
               },
-              (routerProps) => {},
             ]}
-            tabs={["Menu", "Discover"]}
-            selected={1}
+            tabs={["Overview", "Campaigns", "Posts"]}
+            selected={2}
           />
         )}
         {state.loading && <div>Loading ...</div>}
@@ -119,8 +101,8 @@ export default class PostsPage extends React.Component<
           state.success &&
           state.posts.map((post, i) => {
             return (
-              <div>
-                <div key={i} className="PostCard">
+              <div key={i}>
+                <div className="PostCard">
                   <Post
                     key={post.mediaURL}
                     mediaType={post.mediaType}
@@ -134,48 +116,11 @@ export default class PostsPage extends React.Component<
                     routerProps={this.props.routerProps}
                   />
                 </div>
-                <div key={`menuitem${i}`}>
-                  <ScrollMenu LeftArrow={{}} RightArrow={{}}>
-                    <div
-                      style={{
-                        width: "80vw",
-                        marginLeft: "1%",
-                      }}
-                      className="PostCard"
-                    >
-                      <Menu
-                        routerProps={this.props.routerProps}
-                        item={{
-                          currency: "SGD",
-                          id: 1,
-                          mediaURL:
-                            "https://grab-discover.s3.ap-southeast-1.amazonaws.com/fc9b49aa19f746189a565d61e2d487ce/cheese-burger.jpeg",
-                          name: "cheese burger",
-                          price: 10,
-                        }}
-                      />
-                    </div>
-                    <div
-                      className="PostCard"
-                      style={{
-                        width: "80vw",
-                        marginLeft: "1%",
-                      }}
-                    >
-                      <Menu
-                        routerProps={this.props.routerProps}
-                        item={{
-                          currency: "SGD",
-                          id: 1,
-                          mediaURL:
-                            "https://grab-discover.s3.ap-southeast-1.amazonaws.com/fc9b49aa19f746189a565d61e2d487ce/cheese-burger.jpeg",
-                          name: "cheese burger",
-                          price: 10,
-                        }}
-                      />
-                    </div>
-                  </ScrollMenu>
-                </div>
+                <ItemsBelowPost
+                  key={`menuitem${i}`}
+                  items={post.items}
+                  routerProps={this.props.routerProps}
+                />
               </div>
             );
           })}

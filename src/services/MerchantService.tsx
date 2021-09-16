@@ -17,7 +17,7 @@ import {
 const uploadMedia = async (req: UploadRequest): Promise<UploadResponse> => {
   const formData = new FormData();
   formData.append("file", req.file);
-  return HttpFileClient.post(`/merchant/upload`, formData).then((body) => {
+  return HttpFileClient.post(`/media/upload`, formData).then((body) => {
     console.log(body.data);
     return {
       id: body.data.id,
@@ -52,6 +52,7 @@ const getPost = async (req: GetPostReq): Promise<GetPostRes> => {
         merchantName: body.data.merchant_name,
         mediaType: body.data.media_mimetype,
         logoUrl: body.data.logo_url,
+        items: getItemResFromBody(body.data.items),
       };
     }
   );
@@ -71,6 +72,7 @@ const getPosts = async (req: GetPostsReq): Promise<GetPostsRes> => {
           merchantName: post.merchant_name,
           mediaType: post.media_mimetype,
           logoUrl: post.logo_url,
+          items: getItemResFromBody(post.items),
         };
       }),
     };
@@ -92,6 +94,7 @@ const discover = async (): Promise<GetPostsRes> => {
           mediaType: post.media_mimetype,
           logoUrl: post.logo_url,
           merchantID: post.merchant_id,
+          items: getItemResFromBody(post.items),
         };
       }),
     };
@@ -123,6 +126,18 @@ const getMerchant = async (req: GetMerchantReq): Promise<GetMerchantRes> => {
       id: req.id,
       name: body.data.name,
       logoURL: body.data.logo_url,
+    };
+  });
+};
+
+const getItemResFromBody = (items: any[]): GetItemRes[] => {
+  return items.map((item) => {
+    return {
+      id: item.id,
+      mediaURL: item.media_url,
+      name: item.name,
+      price: item.price,
+      currency: item.currency,
     };
   });
 };

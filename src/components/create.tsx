@@ -4,7 +4,6 @@ import { RouterProps } from "react-router-dom";
 import "../css/createPost.css";
 import MerchantService from "../services/MerchantService";
 import { Redirect } from "react-router-dom";
-import ClipLoader from "react-spinners/ClipLoader";
 
 export interface CreatePostProps {
   merchantID: string;

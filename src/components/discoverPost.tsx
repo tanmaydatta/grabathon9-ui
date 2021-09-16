@@ -14,7 +14,7 @@ export interface DiscoverPostProps {
   logoURL: string;
   mediaType: string;
   routerProps: RouterProps;
-  merchantID: number;
+  merchantID: string;
 }
 
 export default class DiscoverPost extends React.Component<DiscoverPostProps> {
@@ -92,7 +92,7 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
             }}
             onClick={() => {
               this.props.routerProps.history.push(
-                `/merchant/${this.props.merchantID}/post/${this.props.postID}`
+                `/pax/merchant/${this.props.merchantID}/post/${this.props.postID}`
               );
             }}
             alt={this.props.mediaURL}

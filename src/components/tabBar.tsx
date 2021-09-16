@@ -20,7 +20,7 @@ export default class TabBar extends React.Component<TabBarProps> {
         }}
       >
         {this.props.tabs.map((tab: string, i: number) => {
-          var color = i == this.props.selected ? "black" : "grey";
+          var color = i === this.props.selected ? "black" : "grey";
           return (
             <div
               key={i}

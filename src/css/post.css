@@ -84,7 +84,7 @@
   justify-content: center;
   font-size: calc(15px + (24 - 16) * (100vw - 400px) / (800 - 400));
   margin-left: 5px;
-  flex: 1;
+  flex: 8;
 }
 
 .Actions {

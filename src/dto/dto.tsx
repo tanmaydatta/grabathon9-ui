@@ -30,6 +30,7 @@ export interface GetPostRes {
   merchantName: string;
   mediaType: string;
   merchantID?: number;
+  items: GetItemRes[];
 }
 
 export interface GetPostsReq {
