@@ -2,6 +2,8 @@ import { HttpFileClient, HttpClient } from "../http-common";
 import {
   CreatePostReq,
   CreatePostRes,
+  GetItemRes,
+  GetMenuRes,
   GetPostReq,
   GetPostRes,
   GetPostsReq,
@@ -94,12 +96,29 @@ const discover = async (): Promise<GetPostsRes> => {
   });
 };
 
+const getMenu = async (req: GetPostsReq): Promise<GetMenuRes> => {
+  return HttpClient.get(`/merchant/${req.merchantID}/menu`).then((body) => {
+    console.log(body);
+    var items = body.data.items as any[];
+    return {
+      items: items.map((item): GetItemRes => {
+        return {
+          id: item.id,
+          mediaURL: item.media_url,
+          name: item.name,
+        };
+      }),
+    };
+  });
+};
+
 const MerchantService = {
   uploadMedia,
   createPost,
   getPost,
   getPosts,
   discover,
+  getMenu,
 };
 
 export default MerchantService;

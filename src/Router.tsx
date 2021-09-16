@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import App from "./components/App";
 import CreatePost from "./components/create";
 import DiscoverPage from "./components/discoverPage";
+import MenuPage from "./components/menuPage";
 import PostPage from "./components/postPage";
 import PostsPage from "./components/postsPage";
 
@@ -56,6 +57,16 @@ export default class Routes extends React.Component<IRoutesProps> {
               exact
               path="/discover"
               render={(props) => <DiscoverPage routerProps={props} />}
+            />
+            <Route
+              exact
+              path="/merchant/:merchantID/menu"
+              render={(props) => (
+                <MenuPage
+                  routerProps={props}
+                  merchantID={props.match.params.merchantID}
+                />
+              )}
             />
           </Switch>
         </div>

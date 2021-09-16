@@ -1,27 +1,28 @@
 import * as React from "react";
 import { RouterProps } from "react-router-dom";
-import { GetPostRes } from "../dto/dto";
+import { GetItemRes } from "../dto/dto";
 import MerchantService from "../services/MerchantService";
 import Post from "./post";
 import "../css/postsPage.css";
+import Menu from "./menu";
 import TabBar from "./tabBar";
 
-interface PostsPageState {
+interface MenuPageState {
   loading: boolean;
   success: boolean;
-  posts: GetPostRes[];
+  posts: GetItemRes[];
 }
 
-interface PostsPageProps {
+interface MenuPageProps {
   merchantID: string;
   routerProps: RouterProps;
 }
 
-export default class PostsPage extends React.Component<
-  PostsPageProps,
-  PostsPageState
+export default class MenuPage extends React.Component<
+  MenuPageProps,
+  MenuPageState
 > {
-  constructor(props: PostsPageProps) {
+  constructor(props: MenuPageProps) {
     super(props);
     this.state = {
       success: true,
@@ -31,7 +32,7 @@ export default class PostsPage extends React.Component<
   }
 
   componentDidMount() {
-    MerchantService.getPosts({
+    MerchantService.getMenu({
       merchantID: Number(this.props.merchantID),
     })
       .then((resp) => {
@@ -40,7 +41,7 @@ export default class PostsPage extends React.Component<
           ...this.state,
           success: true,
           loading: false,
-          posts: resp.posts,
+          posts: resp.items,
         });
       })
       .catch((e) => {
@@ -55,20 +56,16 @@ export default class PostsPage extends React.Component<
   }
   public render() {
     const state = this.state;
+    const discoverClick = (routerProps: RouterProps) => {
+      routerProps.history.push(`/merchant/${this.props.merchantID}/posts`);
+    };
     return (
       <div className="App PostsWrapper">
         <TabBar
           routerProps={this.props.routerProps}
-          onTabClick={[
-            (routerProps) => {
-              routerProps.history.push(
-                `/merchant/${this.props.merchantID}/menu`
-              );
-            },
-            (routerProps) => {},
-          ]}
+          onTabClick={[(routerProps) => {}, discoverClick]}
           tabs={["Menu", "Discover"]}
-          selected={1}
+          selected={0}
         />
         {state.loading && <div>Loading ...</div>}
         {!this.state.loading && !state.success && (
@@ -79,15 +76,11 @@ export default class PostsPage extends React.Component<
           state.posts.map((post, i) => {
             return (
               <div key={i} className="PostCard">
-                <Post
+                <Menu
                   key={post.mediaURL}
-                  mediaType={post.mediaType}
-                  logoURL={post.logoUrl}
-                  merchantName={post.merchantName}
                   mediaURL={post.mediaURL}
-                  date={post.datePosted}
-                  postID={post.postID}
-                  title={post.title}
+                  id={post.id}
+                  name={post.name}
                   merchantID={this.props.merchantID}
                   routerProps={this.props.routerProps}
                 />

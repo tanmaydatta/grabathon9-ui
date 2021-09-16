@@ -47,3 +47,16 @@ export interface UploadRequest {
 export interface UploadResponse {
   id: number;
 }
+
+export interface GetItemRes {
+  id: number;
+  mediaURL: string;
+  name: string;
+}
+export interface GetMenuRes {
+  items: GetItemRes[];
+}
+
+export interface GetMenuReq {
+  merchantID: number;
+}
