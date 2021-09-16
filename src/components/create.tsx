@@ -6,6 +6,7 @@ import MerchantService from "../services/MerchantService";
 import { Redirect } from "react-router-dom";
 import Select from "react-select";
 import { itemClassName } from "react-horizontal-scrolling-menu/dist/constants";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 
 export interface CreatePostProps {
   merchantID: string;
@@ -164,7 +165,42 @@ export default class CreatePost extends React.Component<
             {this.state.success && (
               <Redirect to={`/merchant/${this.props.merchantID}/posts`} />
             )}
+
             <div className="CreatePost">
+              <div>
+                <label htmlFor="media">
+                  <input
+                    ref={this.hiddenFileInput}
+                    type="file"
+                    id="media"
+                    name="photo"
+                    accept="image/*, video/*"
+                    hidden
+                    onChange={this.onFileInputChange}
+                  />
+                  <button
+                    // style={{ background: "grey" }}
+                    className="FileInput"
+                    onClick={this.buttonClick}
+                  >
+                    Upload an image or video
+                  </button>
+                </label>
+              </div>
+              {!this.state.fileUploaded && (
+                <div
+                  onClick={this.buttonClick}
+                  className="FilePlaceholder"
+                  style={{
+                    margin: "2% 0 0 0",
+                    alignItems: "center",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <AiOutlinePlusCircle size={"15%"} color="#5f6061" />
+                </div>
+              )}
               {this.state.fileUploaded && this.state.isImg && (
                 <img
                   className="PostImage"
@@ -185,24 +221,7 @@ export default class CreatePost extends React.Component<
                   />
                 </div>
               )}
-              <div style={{}}>
-                <label htmlFor="media">
-                  <input
-                    ref={this.hiddenFileInput}
-                    type="file"
-                    id="media"
-                    name="photo"
-                    accept="image/*, video/*"
-                    hidden
-                    onChange={this.onFileInputChange}
-                    // value={photo}
-                  />
-                  <button className="FileInput" onClick={this.buttonClick}>
-                    Choose File
-                  </button>
-                </label>
-              </div>
-
+              <div className="HeadLineLabel">Add Headline</div>
               <input
                 placeholder="Title"
                 value={this.state.title}
@@ -210,6 +229,7 @@ export default class CreatePost extends React.Component<
                 onKeyPress={this.onSubmit}
                 className="Title"
               ></input>
+              <div className="HeadLineLabel">Add Menu items</div>
               <div
                 style={{
                   margin: "2% 0 0 0",

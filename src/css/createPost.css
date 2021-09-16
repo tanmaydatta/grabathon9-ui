@@ -14,5 +14,19 @@
   padding: 1%;
   font-size: large;
   margin-top: 2%;
+  background-color: #d7d9db;
   width: 100%;
+  text-align: left;
+}
+
+.FilePlaceholder {
+  background-color: #bfc2c7;
+  min-height: 30vh;
+}
+
+.HeadLineLabel {
+  margin-top: 2%;
+  padding: 1% 0 2% 2%;
+  background-color: #d7d9db;
+  text-align: left;
 }
