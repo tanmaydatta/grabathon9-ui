@@ -1,7 +1,7 @@
 import * as React from "react";
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
 import { RouterProps } from "react-router-dom";
-import { GetItemRes } from "../dto/dto";
+import { GetItemRes, GetPostRes } from "../dto/dto";
 import Menu from "./menu";
 
 export interface ItemsBelowPostProps {
@@ -9,6 +9,7 @@ export interface ItemsBelowPostProps {
   items: GetItemRes[];
   userID: string;
   merchantID: string;
+  post: GetPostRes;
 }
 
 export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps> {
@@ -21,6 +22,7 @@ export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps>
             pathname: `/pax/${this.props.userID}/merchant/${this.props.merchantID}/menu`,
             state: {
               selected: true,
+              post: this.props.post,
             },
           });
         }}

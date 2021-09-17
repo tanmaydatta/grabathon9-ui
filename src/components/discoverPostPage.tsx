@@ -135,6 +135,7 @@ export default class DiscoverPostPage extends React.Component<
           userID={this.props.userID}
           merchantID={this.props.merchantID}
           routerProps={this.props.routerProps}
+          post={this.state.post}
         />
       </div>
     );

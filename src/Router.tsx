@@ -13,6 +13,7 @@ import MexEntryHome from "./components/mexEntryHome";
 import MexEntryOverview from "./components/mexEntryOverview";
 import Comments from "./components/comments";
 import PaxEntryHome from "./components/paxEntry";
+import { GetPostRes } from "./dto/dto";
 
 export interface IRoutesProps {}
 
@@ -82,9 +83,12 @@ export default class Routes extends React.Component<IRoutesProps> {
               render={(props) => {
                 const state = props.location.state as {
                   selected: boolean;
+                  post: GetPostRes;
                 };
+                console.log(state);
                 return (
                   <MenuPage
+                    post={state?.post}
                     routerProps={props}
                     merchantID={props.match.params.merchantID}
                     selected={state?.selected}

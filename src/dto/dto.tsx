@@ -117,3 +117,19 @@ export interface Comment {
   profileURL: string;
   userName: string;
 }
+
+export const EmptyPost = {
+  merchantID: 0,
+  mediaType: "",
+  boosted: false,
+  mediaURL: "",
+  logoUrl: "",
+  title: "",
+  merchantName: "",
+  datePosted: new Date(),
+  postID: 0,
+  items: [],
+  likes: 0,
+  comments: 0,
+  isLiked: false,
+};

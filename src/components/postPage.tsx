@@ -4,7 +4,7 @@ import "../css/App.css";
 import MerchantService from "../services/MerchantService";
 import Post from "./post";
 import "../css/postPage.css";
-import { GetPostRes } from "../dto/dto";
+import { EmptyPost, GetPostRes } from "../dto/dto";
 import ItemsBelowPost from "./itemsBelowPost";
 import boostPopup from "./boostPopup";
 
@@ -120,6 +120,7 @@ export default class PostPage extends React.Component<
             routerProps={this.props.routerProps}
             merchantID={this.props.merchantID}
             userID={""}
+            post={EmptyPost}
           />
         </div>
         {

@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouterProps } from "react-router-dom";
-import { GetItemRes, GetMerchantRes } from "../dto/dto";
+import { GetItemRes, GetMerchantRes, GetPostRes } from "../dto/dto";
 import MerchantService from "../services/MerchantService";
 import "../css/postsPage.css";
 import Menu from "./menu";
@@ -11,12 +11,14 @@ interface MenuPageState {
   success: boolean;
   posts: GetItemRes[];
   merchant?: GetMerchantRes;
+  postItems: GetItemRes[];
 }
 
 interface MenuPageProps {
   merchantID: string;
   routerProps: RouterProps;
   selected: boolean;
+  post: GetPostRes;
 }
 
 export default class MenuPage extends React.Component<
@@ -25,10 +27,12 @@ export default class MenuPage extends React.Component<
 > {
   constructor(props: MenuPageProps) {
     super(props);
+    // console.log(props.post?.items);
     this.state = {
       success: true,
       loading: true,
       posts: [],
+      postItems: this.props.post?.items,
     };
   }
 
@@ -117,7 +121,10 @@ export default class MenuPage extends React.Component<
             return (
               <div key={i} className="PostCard">
                 <Menu
-                  selected={this.props.selected}
+                  selected={
+                    this.props.post?.items.filter((item) => item.id == post.id)
+                      .length == 1
+                  }
                   key={post.mediaURL}
                   routerProps={this.props.routerProps}
                   item={post}
@@ -129,10 +136,7 @@ export default class MenuPage extends React.Component<
           style={{
             display: "flex",
             flexDirection: "column",
-            // height: "100vh",
             width: "100%",
-            // position: "relative",
-            // justifyContent: "end",
           }}
         >
           <div

@@ -173,6 +173,7 @@ export default class DiscoverMerchant extends React.Component<
                   />
                 </div>
                 <ItemsBelowPost
+                  post={post}
                   merchantID={this.props.merchantID}
                   userID={this.props.userID}
                   key={`menuitem${i}`}

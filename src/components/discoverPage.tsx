@@ -124,6 +124,7 @@ export default class DiscoverPage extends React.Component<
                   key={`menuitem${i}`}
                   items={post.items}
                   routerProps={this.props.routerProps}
+                  post={post}
                 />
               </div>
             );

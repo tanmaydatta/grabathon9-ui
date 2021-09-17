@@ -1,5 +1,5 @@
 import { RouterProps } from "react-router-dom";
-import { GetMerchantRes, GetPostRes } from "../dto/dto";
+import { EmptyPost, GetMerchantRes, GetPostRes } from "../dto/dto";
 import MerchantService from "../services/MerchantService";
 import Post from "./post";
 import "../css/postsPage.css";
@@ -142,6 +142,7 @@ export default class PostsPage extends React.Component<
                     />
                   </div>
                   <ItemsBelowPost
+                    post={EmptyPost}
                     merchantID={this.props.merchantID}
                     userID={""}
                     key={`menuitem${i}`}
