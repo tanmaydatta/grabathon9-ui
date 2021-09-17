@@ -91,10 +91,11 @@ export default class Comments extends React.Component<
             onChange={this.onType.bind(this)}
             style={{
               zIndex: 10,
-              width: "88%",
+              width: "72%",
               textAlign: "left",
               margin: "5% 0% 5% 5%",
               paddingLeft: "2%",
+              paddingRight: "16%",
               height: "5vh",
               display: "flex",
               alignItems: "center",

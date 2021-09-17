@@ -14,7 +14,7 @@ export default class Comment extends React.Component<CommentProps> {
           <div className="ProfileImageContainer">
             <img
               className="ProfileImage"
-              src="https://grab-discover.s3.ap-southeast-1.amazonaws.com/bb1be729c4df46e7ba224ce3c8901cc8/chicken-burger.jpeg"
+              src={this.props.comment.profileURL}
               alt=""
             />
           </div>
