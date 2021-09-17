@@ -1,3 +1,4 @@
+import { relative } from "path";
 import * as React from "react";
 
 export interface BoostPopupProps {
@@ -25,7 +26,6 @@ const boostPopup = (
       >
         <div
           style={{
-            // padding: "2vh 0 2vh 0",
             margin: "0 0 0 10%",
             textAlign: "left",
             width: "100%",
@@ -33,18 +33,37 @@ const boostPopup = (
         >
           {amount}
         </div>
-        <input
-          onChange={(e) => {
-            onDaysChanged(e);
-          }}
+        <div
           style={{
-            width: "85%",
-            height: "5vh",
-            margin: "1%",
-            padding: "1% 1% 1% 3%",
+            display: "flex",
+            width: "90%",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "6vh",
+            position: "relative",
           }}
-          placeholder="Enter number of days"
-        ></input>
+        >
+          <div
+            style={{
+              padding: "0 2% 0 2%",
+              position: "absolute",
+              right: 1,
+            }}
+          >
+            days
+          </div>
+          <input
+            onChange={(e) => {
+              onDaysChanged(e);
+            }}
+            style={{
+              width: "100%",
+              height: "5vh",
+              paddingLeft: "1%",
+            }}
+            placeholder="0"
+          ></input>
+        </div>
         <div
           style={{
             margin: "2% 1% 1% 1%",

@@ -2,7 +2,11 @@ import moment from "moment";
 import * as React from "react";
 import ReactPlayer from "react-player";
 import "../css/post.css";
-import { AiOutlineLike, AiTwotoneCheckCircle } from "react-icons/ai";
+import {
+  AiFillLike,
+  AiOutlineLike,
+  AiTwotoneCheckCircle,
+} from "react-icons/ai";
 import { RouterProps } from "react-router-dom";
 
 export interface DiscoverPostProps {
@@ -15,6 +19,11 @@ export interface DiscoverPostProps {
   mediaType: string;
   routerProps: RouterProps;
   merchantID: string;
+  likes: number;
+  boosted: boolean;
+  comments: number;
+  isLiked: boolean;
+  onLike: () => void;
 }
 
 export default class DiscoverPost extends React.Component<DiscoverPostProps> {
@@ -63,6 +72,7 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
                     .local()
                     .fromNow()}
                 </div>
+                {this.props.boosted && <div>Sponsored</div>}
               </div>
             </div>
             <div
@@ -71,15 +81,29 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
                 flexDirection: "column",
                 marginRight: "1%",
               }}
+              onClick={this.props.onLike}
             >
-              <AiOutlineLike
-                size={
-                  "calc( 30px + (24 - 16) * (100vw - 400px) / (800 - 400) )"
-                }
-                style={{
-                  flex: 1,
-                }}
-              />
+              {!this.props.isLiked && (
+                <AiOutlineLike
+                  size={
+                    "calc( 30px + (24 - 16) * (100vw - 400px) / (800 - 400) )"
+                  }
+                  style={{
+                    flex: 1,
+                  }}
+                />
+              )}
+              {this.props.isLiked && (
+                <AiFillLike
+                  size={
+                    "calc( 30px + (24 - 16) * (100vw - 400px) / (800 - 400) )"
+                  }
+                  style={{
+                    flex: 1,
+                    color: "#e75480",
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
@@ -113,8 +137,9 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
         )}
         <div className="BelowPostMedia">
           <div style={{ flex: 1 }}>
-            5 likes{"\u00A0\u00A0\u00A0"}4 comments{"\u00A0\u00A0\u00A0"}6
-            shares
+            {this.props.likes} likes{"\u00A0\u00A0\u00A0"}
+            {this.props.comments} comments
+            {"\u00A0\u00A0\u00A0"}6 shares
           </div>
           <div>10 orders placed</div>
         </div>

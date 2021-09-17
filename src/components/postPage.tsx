@@ -47,6 +47,9 @@ export default class PostPage extends React.Component<
         datePosted: new Date(),
         postID: 0,
         items: [],
+        likes: 0,
+        comments: 0,
+        isLiked: false,
       },
     };
   }
@@ -88,6 +91,8 @@ export default class PostPage extends React.Component<
           </div>
           <div className="PostPage" hidden={state.loading || !state.success}>
             <Post
+              comments={post.comments}
+              likes={post.likes}
               boosted={post.boosted}
               mediaType={post.mediaType}
               logoURL={post.logoUrl}
@@ -98,6 +103,7 @@ export default class PostPage extends React.Component<
               title={post.title}
               merchantID={this.props.merchantID}
               routerProps={this.props.routerProps}
+              isLiked={post.isLiked}
               onBoostClicked={() => {
                 if (!post.boosted) {
                   this.setState({

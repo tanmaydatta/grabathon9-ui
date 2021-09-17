@@ -44,9 +44,10 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/pax/merchant/:merchantID/post/:postID"
+              path="/pax/:userID/merchant/:merchantID/post/:postID"
               render={(props) => (
                 <DiscoverPostPage
+                  userID={props.match.params.userID}
                   merchantID={props.match.params.merchantID}
                   postID={props.match.params.postID}
                   routerProps={props}
@@ -65,8 +66,13 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/discover"
-              render={(props) => <DiscoverPage routerProps={props} />}
+              path="/pax/:userID/discover"
+              render={(props) => (
+                <DiscoverPage
+                  userID={props.match.params.userID}
+                  routerProps={props}
+                />
+              )}
             />
             <Route
               exact
@@ -80,11 +86,12 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/pax/merchant/:merchantID/posts"
+              path="/pax/:userID/merchant/:merchantID/posts"
               render={(props) => (
                 <DiscoverMerchant
                   routerProps={props}
                   merchantID={props.match.params.merchantID}
+                  userID={props.match.params.userID}
                 />
               )}
             />

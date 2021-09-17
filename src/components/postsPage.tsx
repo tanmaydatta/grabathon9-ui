@@ -116,6 +116,8 @@ export default class PostsPage extends React.Component<
                 <div key={i}>
                   <div className="PostCard">
                     <Post
+                      comments={post.comments}
+                      likes={post.likes}
                       boosted={post.boosted}
                       key={post.mediaURL}
                       mediaType={post.mediaType}
@@ -127,6 +129,7 @@ export default class PostsPage extends React.Component<
                       title={post.title}
                       merchantID={this.props.merchantID}
                       routerProps={this.props.routerProps}
+                      isLiked={post.isLiked}
                       onBoostClicked={() => {
                         if (!post.boosted) {
                           this.setState({
@@ -151,7 +154,7 @@ export default class PostsPage extends React.Component<
           this.state.boostClicked &&
             boostPopup(
               this.state.boostSuccess
-                ? `This will cost you ${this.state.amount} SGD`
+                ? `This will cost you ${this.state.amount.toFixed(5)} SGD`
                 : `Some error occurred, please check console`,
               () => {
                 const post = this.state.posts[this.state.postIndex];
@@ -183,6 +186,8 @@ export default class PostsPage extends React.Component<
                 this.setState({
                   ...this.state,
                   boostClicked: false,
+                  boostSuccess: true,
+                  amount: 0,
                 });
               }
             )

@@ -11,6 +11,7 @@ interface DiscoverPostPageProps {
   postID: string;
   merchantID: string;
   routerProps: RouterProps;
+  userID: string;
 }
 
 interface DiscoverPostPageState {
@@ -29,6 +30,7 @@ export default class DiscoverPostPage extends React.Component<
       loading: true,
       success: true,
       post: {
+        comments: 0,
         mediaType: "",
         mediaURL: "",
         logoUrl: "",
@@ -38,6 +40,8 @@ export default class DiscoverPostPage extends React.Component<
         postID: 0,
         items: [],
         boosted: false,
+        likes: 0,
+        isLiked: false,
       },
     };
   }
@@ -67,6 +71,32 @@ export default class DiscoverPostPage extends React.Component<
       });
   }
 
+  onLike() {
+    let post = this.state.post;
+    if (!post) {
+      return;
+    }
+    if (isNaN(Number(this.props.userID))) {
+      return;
+    }
+    MerchantService.likePost({
+      userID: Number(this.props.userID),
+      postID: post.postID,
+    })
+      .then((res) => {
+        post.isLiked = res.isLiked;
+        post.likes = res.likes;
+
+        this.setState({
+          ...this.state,
+          post: post,
+        });
+      })
+      .catch((e) => {
+        alert("Not able to like post!");
+      });
+  }
+
   public render() {
     const state = this.state;
     const post = state.post;
@@ -81,6 +111,9 @@ export default class DiscoverPostPage extends React.Component<
           hidden={state.loading || !state.success}
         >
           <DiscoverPost
+            isLiked={post.isLiked}
+            boosted={post.boosted}
+            likes={post.likes}
             mediaType={post.mediaType}
             logoURL={post.logoUrl}
             merchantName={post.merchantName}
@@ -90,6 +123,8 @@ export default class DiscoverPostPage extends React.Component<
             title={post.title}
             merchantID={this.props.merchantID}
             routerProps={this.props.routerProps}
+            comments={post.comments}
+            onLike={this.onLike.bind(this)}
           />
         </div>
         <ItemsBelowPost

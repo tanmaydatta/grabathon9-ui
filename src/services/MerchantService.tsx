@@ -4,6 +4,7 @@ import {
   BoostPostRes,
   CreatePostReq,
   CreatePostRes,
+  DiscoverReq,
   GetItemRes,
   GetMenuRes,
   GetMerchantReq,
@@ -12,6 +13,8 @@ import {
   GetPostRes,
   GetPostsReq,
   GetPostsRes,
+  LikeReq,
+  LikeRes,
   UploadRequest,
   UploadResponse,
 } from "../dto/dto";
@@ -57,6 +60,9 @@ const getPost = async (req: GetPostReq): Promise<GetPostRes> => {
         logoUrl: body.data.logo_url,
         items: getItemResFromBody(body.data.items),
         boosted: body.data.is_boosted,
+        likes: body.data.likes,
+        comments: body.data.comments,
+        isLiked: body.data.is_liked,
       };
     }
   );
@@ -78,14 +84,17 @@ const getPosts = async (req: GetPostsReq): Promise<GetPostsRes> => {
           logoUrl: post.logo_url,
           items: getItemResFromBody(post.items),
           boosted: post.is_boosted,
+          likes: post.likes,
+          comments: post.comments,
+          isLiked: post.is_liked,
         };
       }),
     };
   });
 };
 
-const discover = async (): Promise<GetPostsRes> => {
-  return HttpClient.get(`/discover`).then((body) => {
+const discover = async (req: DiscoverReq): Promise<GetPostsRes> => {
+  return HttpClient.get(`/user/${req.userID}/discover`).then((body) => {
     console.log(body);
     var posts = body.data.posts as any[];
     return {
@@ -101,6 +110,9 @@ const discover = async (): Promise<GetPostsRes> => {
           merchantID: post.merchant_id,
           items: getItemResFromBody(post.items),
           boosted: post.is_boosted,
+          likes: post.likes,
+          comments: post.comments,
+          isLiked: post.is_liked,
         };
       }),
     };
@@ -162,6 +174,19 @@ const boostPost = async (req: BoostPostReq): Promise<BoostPostRes> => {
   });
 };
 
+const likePost = async (req: LikeReq): Promise<LikeRes> => {
+  const params = JSON.stringify({
+    user_id: req.userID,
+  });
+  return HttpClient.post(`/post/${req.postID}/like`, params).then((body) => {
+    console.log(body.data);
+    return {
+      isLiked: body.data.is_liked,
+      likes: body.data.total_likes,
+    };
+  });
+};
+
 const MerchantService = {
   uploadMedia,
   createPost,
@@ -171,6 +196,7 @@ const MerchantService = {
   getMenu,
   getMerchant,
   boostPost,
+  likePost,
 };
 
 export default MerchantService;

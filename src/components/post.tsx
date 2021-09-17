@@ -17,6 +17,9 @@ export interface PostProps {
   merchantID: string;
   boosted: boolean;
   onBoostClicked: () => void;
+  likes: number;
+  comments: number;
+  isLiked: boolean;
 }
 
 export interface PostState {}
@@ -50,6 +53,7 @@ export default class Post extends React.Component<PostProps, PostState> {
                     .local()
                     .fromNow()}
                 </div>
+                {this.props.boosted && <div>Sponsored</div>}
               </div>
             </div>
             <div
@@ -100,7 +104,10 @@ export default class Post extends React.Component<PostProps, PostState> {
           </div>
         )}
         <div className="BelowPostMedia">
-          <div style={{ flex: 1 }}>5 likes{"\u00A0\u00A0\u00A0"}4 comments</div>
+          <div style={{ flex: 1 }}>
+            {this.props.likes} likes{"\u00A0\u00A0\u00A0"}
+            {this.props.comments} comments
+          </div>
           <div>10 orders placed</div>
         </div>
       </div>

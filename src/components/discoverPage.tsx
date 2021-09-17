@@ -10,10 +10,12 @@ interface DiscoverPageState {
   loading: boolean;
   success: boolean;
   posts: GetPostRes[];
+  postIndex: number;
 }
 
 interface DiscoverPageProps {
   routerProps: RouterProps;
+  userID: string;
 }
 
 export default class DiscoverPage extends React.Component<
@@ -26,11 +28,41 @@ export default class DiscoverPage extends React.Component<
       success: true,
       loading: true,
       posts: [],
+      postIndex: 0,
     };
   }
 
+  onLike() {
+    let post = this.state.posts[this.state.postIndex];
+    if (!post) {
+      return;
+    }
+    if (isNaN(Number(this.props.userID))) {
+      return;
+    }
+    MerchantService.likePost({
+      userID: Number(this.props.userID),
+      postID: post.postID,
+    })
+      .then((res) => {
+        let posts = [...this.state.posts];
+        post.isLiked = res.isLiked;
+        post.likes = res.likes;
+        posts[this.state.postIndex] = post;
+        this.setState({
+          ...this.state,
+          posts: posts,
+        });
+      })
+      .catch((e) => {
+        alert("Not able to like post!");
+      });
+  }
+
   componentDidMount() {
-    MerchantService.discover()
+    MerchantService.discover({
+      userID: this.props.userID,
+    })
       .then((resp) => {
         console.log("setting state in success", resp);
         this.setState({
@@ -62,9 +94,10 @@ export default class DiscoverPage extends React.Component<
           state.success &&
           state.posts.map((post, i) => {
             return (
-              <div>
-                <div key={i} className="PostCard">
+              <div key={i}>
+                <div className="PostCard">
                   <DiscoverPost
+                    likes={post.likes}
                     key={post.mediaURL}
                     mediaType={post.mediaType}
                     logoURL={post.logoUrl}
@@ -77,6 +110,10 @@ export default class DiscoverPage extends React.Component<
                       post.merchantID ? post.merchantID.toString() : ""
                     }
                     routerProps={this.props.routerProps}
+                    boosted={post.boosted}
+                    comments={post.comments}
+                    isLiked={post.isLiked}
+                    onLike={this.onLike.bind(this)}
                   />
                 </div>
                 <ItemsBelowPost

@@ -33,6 +33,9 @@ export interface GetPostRes {
   merchantID?: number;
   items: GetItemRes[];
   boosted: boolean;
+  likes: number;
+  comments: number;
+  isLiked: boolean;
 }
 
 export interface GetPostsReq {
@@ -84,4 +87,18 @@ export interface BoostPostReq {
 
 export interface BoostPostRes {
   success: boolean;
+}
+
+export interface DiscoverReq {
+  userID: string;
+}
+
+export interface LikeReq {
+  userID: number;
+  postID: number;
+}
+
+export interface LikeRes {
+  isLiked: boolean;
+  likes: number;
 }
