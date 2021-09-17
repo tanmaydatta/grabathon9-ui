@@ -11,6 +11,7 @@ import DiscoverMerchant from "./components/discoverMerchant";
 import DiscoverPostPage from "./components/discoverPostPage";
 import MexEntryHome from "./components/mexEntryHome";
 import MexEntryOverview from "./components/mexEntryOverview";
+import Comments from "./components/comments";
 
 export interface IRoutesProps {}
 
@@ -121,6 +122,17 @@ export default class Routes extends React.Component<IRoutesProps> {
                 <MexEntryOverview
                   merchantID={props.match.params.merchantID}
                   routerProps={props}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/pax/:userID/post/:postID/comments"
+              render={(props) => (
+                <Comments
+                  userID={props.match.params.userID}
+                  routerProps={props}
+                  postID={props.match.params.postID}
                 />
               )}
             />

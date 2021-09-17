@@ -2,9 +2,12 @@ import { HttpFileClient, HttpClient } from "../http-common";
 import {
   BoostPostReq,
   BoostPostRes,
+  Comment,
+  Comments,
   CreatePostReq,
   CreatePostRes,
   DiscoverReq,
+  GetCommentsReq,
   GetItemRes,
   GetMenuRes,
   GetMerchantReq,
@@ -187,6 +190,24 @@ const likePost = async (req: LikeReq): Promise<LikeRes> => {
   });
 };
 
+const getComments = async (req: GetCommentsReq): Promise<Comments> => {
+  return HttpClient.get(`/post/${req.postID}/comment`).then((body) => {
+    console.log(body.data);
+    var items = body.data.comments as any[];
+    return {
+      comments: items.map((item): Comment => {
+        return {
+          content: item.content,
+          datePosted: item.date_posted,
+          commentID: item.id,
+          profileURL: item.profile_url,
+          userName: item.user_name,
+        };
+      }),
+    };
+  });
+};
+
 const MerchantService = {
   uploadMedia,
   createPost,
@@ -197,6 +218,7 @@ const MerchantService = {
   getMerchant,
   boostPost,
   likePost,
+  getComments,
 };
 
 export default MerchantService;

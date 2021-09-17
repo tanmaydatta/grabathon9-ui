@@ -102,3 +102,18 @@ export interface LikeRes {
   isLiked: boolean;
   likes: number;
 }
+
+export interface GetCommentsReq {
+  postID: number;
+}
+export interface Comments {
+  comments: Comment[];
+}
+
+export interface Comment {
+  content: string;
+  datePosted: Date;
+  commentID: number;
+  profileURL: string;
+  userName: string;
+}
