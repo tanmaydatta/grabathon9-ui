@@ -1,6 +1,7 @@
 .Comments {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .CommentsHeader {
@@ -12,6 +13,7 @@
 
 .CommentsList {
   display: flex;
+  flex: 1;
   flex-direction: column;
   margin: 1%;
 }

@@ -118,6 +118,12 @@ export interface Comment {
   userName: string;
 }
 
+export interface CommentReq {
+  postID: number;
+  content: string;
+  userID: number;
+}
+
 export const EmptyPost = {
   merchantID: 0,
   mediaType: "",

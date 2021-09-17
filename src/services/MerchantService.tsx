@@ -3,6 +3,7 @@ import {
   BoostPostReq,
   BoostPostRes,
   Comment,
+  CommentReq,
   Comments,
   CreatePostReq,
   CreatePostRes,
@@ -210,6 +211,16 @@ const getComments = async (req: GetCommentsReq): Promise<Comments> => {
   });
 };
 
+const postComment = async (req: CommentReq): Promise<void> => {
+  const params = JSON.stringify({
+    content: req.content,
+    user_id: req.userID,
+  });
+  return HttpClient.post(`/post/${req.postID}/comment`, params).then((body) => {
+    return;
+  });
+};
+
 const MerchantService = {
   uploadMedia,
   createPost,
@@ -221,6 +232,7 @@ const MerchantService = {
   boostPost,
   likePost,
   getComments,
+  postComment,
 };
 
 export default MerchantService;

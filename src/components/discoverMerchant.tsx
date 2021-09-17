@@ -133,7 +133,7 @@ export default class DiscoverMerchant extends React.Component<
             onTabClick={[
               (routerProps) => {
                 routerProps.history.push(
-                  `/pax/merchant/${this.props.merchantID}/menu`
+                  `/pax/${this.props.userID}/merchant/${this.props.merchantID}/menu`
                 );
               },
               (routerProps) => {},
