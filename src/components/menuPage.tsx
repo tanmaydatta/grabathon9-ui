@@ -124,6 +124,7 @@ export default class MenuPage extends React.Component<
             return (
               <div key={i} className="PostCard">
                 <Menu
+                  userID={this.props.userID}
                   selected={
                     this.props.post?.items.filter((item) => item.id === post.id)
                       .length === 1

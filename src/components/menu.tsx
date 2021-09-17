@@ -8,6 +8,7 @@ export interface MenuProps {
   routerProps: RouterProps;
   item: GetItemRes;
   selected: boolean;
+  userID: string;
 }
 
 export interface MenuState {
@@ -27,7 +28,7 @@ export default class Menu extends React.Component<MenuProps, MenuState> {
       <div
         className="Post"
         onClick={() => {
-          const val = !this.state.selected;
+          const val = !this.state.selected && !(this.props.userID.length === 0);
           this.setState({
             ...this.state,
             selected: val,

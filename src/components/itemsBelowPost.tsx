@@ -18,6 +18,7 @@ export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps>
     return (
       <div
         onClick={() => {
+          if (this.props.userID.length === 0) return;
           this.props.routerProps.history.push({
             pathname: `/pax/${this.props.userID}/merchant/${this.props.merchantID}/menu`,
             state: {
@@ -39,6 +40,7 @@ export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps>
                 key={i}
               >
                 <Menu
+                  userID={this.props.userID}
                   selected={false}
                   routerProps={this.props.routerProps}
                   item={item}
