@@ -21,7 +21,14 @@ export default class Comment extends React.Component<CommentProps> {
           <div className="CommentContent">
             <span>
               <span className="UserName">{this.props.comment.userName}</span>{" "}
-              {this.props.comment.content}
+              <span
+                style={{
+                  fontSize:
+                    "calc(16px + (24 - 16) * (100vw - 400px) / (800 - 400))",
+                }}
+              >
+                {this.props.comment.content}
+              </span>
             </span>
             <div className="CommentTime">
               {moment(moment.utc(this.props.comment.datePosted).toDate())

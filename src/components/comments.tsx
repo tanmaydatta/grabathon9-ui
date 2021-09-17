@@ -75,6 +75,8 @@ export default class Comments extends React.Component<
               return <Comment key={i} comment={item} />;
             })}
         </div>
+        <div style={{ height: "9vh", width: "100%", clear: "both" }}></div>
+
         <div
           style={{
             display: "flex",
@@ -83,6 +85,7 @@ export default class Comments extends React.Component<
             width: "100%",
             position: "fixed",
             bottom: 0,
+            zIndex: 10,
           }}
         >
           <input
@@ -99,7 +102,6 @@ export default class Comments extends React.Component<
               height: "5vh",
               display: "flex",
               alignItems: "center",
-              justifyContent: "center",
             }}
           />
           <div
@@ -107,12 +109,12 @@ export default class Comments extends React.Component<
               padding: "0 6% 0 0",
               position: "fixed",
               right: 2,
-              bottom: 22,
+              bottom: "3vh",
               zIndex: 10,
             }}
             onClick={this.onComment.bind(this)}
           >
-            <AiOutlineSend size={"10vw"} />
+            <AiOutlineSend size={"4vh"} />
           </div>
         </div>
       </div>
