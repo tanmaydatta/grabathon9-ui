@@ -7,13 +7,21 @@ import Menu from "./menu";
 export interface ItemsBelowPostProps {
   routerProps: RouterProps;
   items: GetItemRes[];
+  userID: string;
+  merchantID: string;
 }
 
 export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps> {
   public render() {
     const itemLength = this.props.items?.length;
     return (
-      <div>
+      <div
+        onClick={() => {
+          this.props.routerProps.history.push(
+            `/pax/${this.props.userID}/merchant/${this.props.merchantID}/home`
+          );
+        }}
+      >
         <ScrollMenu LeftArrow={{}} RightArrow={{}}>
           {this.props.items?.map((item, i) => {
             return (

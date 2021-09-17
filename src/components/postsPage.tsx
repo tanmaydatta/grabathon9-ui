@@ -142,6 +142,8 @@ export default class PostsPage extends React.Component<
                     />
                   </div>
                   <ItemsBelowPost
+                    merchantID={this.props.merchantID}
+                    userID={""}
                     key={`menuitem${i}`}
                     items={post.items}
                     routerProps={this.props.routerProps}

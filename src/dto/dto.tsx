@@ -30,7 +30,7 @@ export interface GetPostRes {
   logoUrl: string;
   merchantName: string;
   mediaType: string;
-  merchantID?: number;
+  merchantID: number;
   items: GetItemRes[];
   boosted: boolean;
   likes: number;

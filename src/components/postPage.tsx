@@ -38,6 +38,7 @@ export default class PostPage extends React.Component<
       amount: 0,
       days: "",
       post: {
+        merchantID: 0,
         mediaType: "",
         boosted: false,
         mediaURL: "",
@@ -117,6 +118,8 @@ export default class PostPage extends React.Component<
           <ItemsBelowPost
             items={post.items}
             routerProps={this.props.routerProps}
+            merchantID={this.props.merchantID}
+            userID={""}
           />
         </div>
         {

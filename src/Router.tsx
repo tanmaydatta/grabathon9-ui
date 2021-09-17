@@ -12,6 +12,7 @@ import DiscoverPostPage from "./components/discoverPostPage";
 import MexEntryHome from "./components/mexEntryHome";
 import MexEntryOverview from "./components/mexEntryOverview";
 import Comments from "./components/comments";
+import PaxEntryHome from "./components/paxEntry";
 
 export interface IRoutesProps {}
 
@@ -77,7 +78,7 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/pax/merchant/:merchantID/menu"
+              path="/pax/:userID/merchant/:merchantID/menu"
               render={(props) => (
                 <MenuPage
                   routerProps={props}
@@ -98,10 +99,10 @@ export default class Routes extends React.Component<IRoutesProps> {
             />
             <Route
               exact
-              path="/pax/merchant/:merchantID/home"
+              path="/pax/:userID/merchant/:merchantID/home"
               render={(props) => (
                 <Redirect
-                  to={`/pax/merchant/${props.match.params.merchantID}/menu`}
+                  to={`/pax/${props.match.params.userID}/merchant/${props.match.params.merchantID}/menu`}
                 />
               )}
             />
@@ -111,6 +112,16 @@ export default class Routes extends React.Component<IRoutesProps> {
               render={(props) => (
                 <MexEntryHome
                   merchantID={props.match.params.merchantID}
+                  routerProps={props}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/pax/:userUD/home"
+              render={(props) => (
+                <PaxEntryHome
+                  userID={props.match.params.userUD}
                   routerProps={props}
                 />
               )}

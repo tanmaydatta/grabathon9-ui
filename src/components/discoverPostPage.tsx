@@ -30,6 +30,7 @@ export default class DiscoverPostPage extends React.Component<
       loading: true,
       success: true,
       post: {
+        merchantID: 0,
         comments: 0,
         mediaType: "",
         mediaURL: "",
@@ -111,6 +112,7 @@ export default class DiscoverPostPage extends React.Component<
           hidden={state.loading || !state.success}
         >
           <DiscoverPost
+            userID={this.props.userID}
             isLiked={post.isLiked}
             boosted={post.boosted}
             likes={post.likes}
@@ -129,6 +131,8 @@ export default class DiscoverPostPage extends React.Component<
         </div>
         <ItemsBelowPost
           items={post.items}
+          userID={this.props.userID}
+          merchantID={this.props.merchantID}
           routerProps={this.props.routerProps}
         />
       </div>

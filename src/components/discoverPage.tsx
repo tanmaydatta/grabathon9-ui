@@ -97,6 +97,7 @@ export default class DiscoverPage extends React.Component<
               <div key={i}>
                 <div className="PostCard">
                   <DiscoverPost
+                    userID={this.props.userID}
                     likes={post.likes}
                     key={post.mediaURL}
                     mediaType={post.mediaType}
@@ -117,6 +118,8 @@ export default class DiscoverPage extends React.Component<
                   />
                 </div>
                 <ItemsBelowPost
+                  merchantID={post.merchantID?.toString()}
+                  userID={this.props.userID}
                   key={`menuitem${i}`}
                   items={post.items}
                   routerProps={this.props.routerProps}

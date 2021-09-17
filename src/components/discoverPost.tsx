@@ -23,6 +23,7 @@ export interface DiscoverPostProps {
   boosted: boolean;
   comments: number;
   isLiked: boolean;
+  userID: string;
   onLike: () => void;
 }
 
@@ -116,7 +117,7 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
             }}
             onClick={() => {
               this.props.routerProps.history.push(
-                `/pax/merchant/${this.props.merchantID}/post/${this.props.postID}`
+                `/pax/${this.props.userID}/merchant/${this.props.merchantID}/post/${this.props.postID}`
               );
             }}
             alt={this.props.mediaURL}
@@ -138,7 +139,15 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
         <div className="BelowPostMedia">
           <div style={{ flex: 1 }}>
             {this.props.likes} likes{"\u00A0\u00A0\u00A0"}
-            {this.props.comments} comments
+            <span
+              onClick={() => {
+                this.props.routerProps.history.push(
+                  `/pax/${this.props.userID}/post/${this.props.postID}/comments`
+                );
+              }}
+            >
+              {this.props.comments} comments
+            </span>
             {"\u00A0\u00A0\u00A0"}6 shares
           </div>
           <div>10 orders placed</div>

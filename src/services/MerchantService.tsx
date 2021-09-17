@@ -66,6 +66,7 @@ const getPost = async (req: GetPostReq): Promise<GetPostRes> => {
         likes: body.data.likes,
         comments: body.data.comments,
         isLiked: body.data.is_liked,
+        merchantID: body.data.merchant_id,
       };
     }
   );
@@ -90,6 +91,7 @@ const getPosts = async (req: GetPostsReq): Promise<GetPostsRes> => {
           likes: post.likes,
           comments: post.comments,
           isLiked: post.is_liked,
+          merchantID: post.merchant_id,
         };
       }),
     };
