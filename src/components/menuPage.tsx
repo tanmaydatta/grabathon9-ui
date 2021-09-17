@@ -16,6 +16,7 @@ interface MenuPageState {
 interface MenuPageProps {
   merchantID: string;
   routerProps: RouterProps;
+  selected: boolean;
 }
 
 export default class MenuPage extends React.Component<
@@ -98,7 +99,6 @@ export default class MenuPage extends React.Component<
         >
           {this.state.merchant?.name}
         </div>
-
         {!state.loading && state.success && (
           <TabBar
             routerProps={this.props.routerProps}
@@ -117,6 +117,7 @@ export default class MenuPage extends React.Component<
             return (
               <div key={i} className="PostCard">
                 <Menu
+                  selected={this.props.selected}
                   key={post.mediaURL}
                   routerProps={this.props.routerProps}
                   item={post}
@@ -124,6 +125,36 @@ export default class MenuPage extends React.Component<
               </div>
             );
           })}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            // height: "100vh",
+            width: "100%",
+            // position: "relative",
+            // justifyContent: "end",
+          }}
+        >
+          <div
+            style={{
+              zIndex: 10,
+              width: "90%",
+              textAlign: "center",
+              position: "fixed",
+              bottom: 0,
+              margin: "5% 5% 5% 5%",
+              height: "5vh",
+              backgroundColor: "green",
+              color: "white",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            {" "}
+            Order Now{" "}
+          </div>
+        </div>
       </div>
     );
   }

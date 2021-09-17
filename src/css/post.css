@@ -107,3 +107,11 @@
   width: 20vw;
   padding: 2% 0 2% 0;
 }
+
+.orderTickContainer {
+  display: flex;
+  align-items: center;
+  margin-right: 1%;
+  width: 10vw;
+  height: 100%;
+}

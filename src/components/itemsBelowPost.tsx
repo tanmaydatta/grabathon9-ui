@@ -17,9 +17,12 @@ export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps>
     return (
       <div
         onClick={() => {
-          this.props.routerProps.history.push(
-            `/pax/${this.props.userID}/merchant/${this.props.merchantID}/home`
-          );
+          this.props.routerProps.history.push({
+            pathname: `/pax/${this.props.userID}/merchant/${this.props.merchantID}/menu`,
+            state: {
+              selected: true,
+            },
+          });
         }}
       >
         <ScrollMenu LeftArrow={{}} RightArrow={{}}>
@@ -33,7 +36,11 @@ export default class ItemsBelowPost extends React.Component<ItemsBelowPostProps>
                 className="PostCard"
                 key={i}
               >
-                <Menu routerProps={this.props.routerProps} item={item} />
+                <Menu
+                  selected={false}
+                  routerProps={this.props.routerProps}
+                  item={item}
+                />
               </div>
             );
           })}

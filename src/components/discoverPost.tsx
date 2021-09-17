@@ -24,7 +24,8 @@ export interface DiscoverPostProps {
   comments: number;
   isLiked: boolean;
   userID: string;
-  onLike: () => void;
+  postIndex: number;
+  onLike: (index: number) => void;
 }
 
 export default class DiscoverPost extends React.Component<DiscoverPostProps> {
@@ -82,7 +83,7 @@ export default class DiscoverPost extends React.Component<DiscoverPostProps> {
                 flexDirection: "column",
                 marginRight: "1%",
               }}
-              onClick={this.props.onLike}
+              onClick={() => this.props.onLike(this.props.postIndex)}
             >
               {!this.props.isLiked && (
                 <AiOutlineLike

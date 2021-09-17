@@ -79,12 +79,18 @@ export default class Routes extends React.Component<IRoutesProps> {
             <Route
               exact
               path="/pax/:userID/merchant/:merchantID/menu"
-              render={(props) => (
-                <MenuPage
-                  routerProps={props}
-                  merchantID={props.match.params.merchantID}
-                />
-              )}
+              render={(props) => {
+                const state = props.location.state as {
+                  selected: boolean;
+                };
+                return (
+                  <MenuPage
+                    routerProps={props}
+                    merchantID={props.match.params.merchantID}
+                    selected={state?.selected}
+                  />
+                );
+              }}
             />
             <Route
               exact

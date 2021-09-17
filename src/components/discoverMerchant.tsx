@@ -34,8 +34,8 @@ export default class DiscoverMerchant extends React.Component<
     };
   }
 
-  onLike() {
-    let post = this.state.posts[this.state.postIndex];
+  onLike(postIndex: number) {
+    let post = this.state.posts[postIndex];
     if (!post) {
       return;
     }
@@ -50,7 +50,7 @@ export default class DiscoverMerchant extends React.Component<
         let posts = [...this.state.posts];
         post.isLiked = res.isLiked;
         post.likes = res.likes;
-        posts[this.state.postIndex] = post;
+        posts[postIndex] = post;
         this.setState({
           ...this.state,
           posts: posts,
@@ -153,6 +153,7 @@ export default class DiscoverMerchant extends React.Component<
               <div key={i}>
                 <div className="PostCard">
                   <DiscoverPost
+                    postIndex={i}
                     userID={this.props.userID}
                     likes={post.likes}
                     key={post.mediaURL}

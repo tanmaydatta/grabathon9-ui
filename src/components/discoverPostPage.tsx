@@ -112,6 +112,7 @@ export default class DiscoverPostPage extends React.Component<
           hidden={state.loading || !state.success}
         >
           <DiscoverPost
+            postIndex={0}
             userID={this.props.userID}
             isLiked={post.isLiked}
             boosted={post.boosted}
