@@ -12,6 +12,7 @@ export default class MexEntryOverview extends React.Component<MexEntryOverviewPr
     return (
       //   <div>
       <img
+        alt={this.props.merchantID}
         style={{
           width: "100%",
           height: "100vh",

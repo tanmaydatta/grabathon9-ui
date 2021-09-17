@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouterProps } from "react-router-dom";
-import mex_entry_home from "../assets/images/mex_entry_home.jpg";
+import mex_entry_home from "../assets/images/mex_entry_home.png";
 
 export interface MexEntryHomeProps {
   routerProps: RouterProps;
@@ -10,7 +10,6 @@ export interface MexEntryHomeProps {
 export default class MexEntryHome extends React.Component<MexEntryHomeProps> {
   public render() {
     return (
-      //   <div>
       <img
         style={{
           width: "100%",
@@ -24,7 +23,6 @@ export default class MexEntryHome extends React.Component<MexEntryHomeProps> {
         alt="mex_entry_home"
         src={mex_entry_home}
       />
-      //   </div>
     );
   }
 }

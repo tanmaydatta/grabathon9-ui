@@ -1,6 +1,3 @@
-import { relative } from "path";
-import * as React from "react";
-
 export interface BoostPopupProps {
   onBoost: () => void;
 }

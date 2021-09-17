@@ -1,6 +1,6 @@
 import * as React from "react";
 import { RouterProps } from "react-router-dom";
-import { GetMerchantRes, GetPostReq, GetPostRes } from "../dto/dto";
+import { GetMerchantRes, GetPostRes } from "../dto/dto";
 import MerchantService from "../services/MerchantService";
 import TabBar from "./tabBar";
 import DiscoverPost from "./discoverPost";

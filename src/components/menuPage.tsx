@@ -122,8 +122,8 @@ export default class MenuPage extends React.Component<
               <div key={i} className="PostCard">
                 <Menu
                   selected={
-                    this.props.post?.items.filter((item) => item.id == post.id)
-                      .length == 1
+                    this.props.post?.items.filter((item) => item.id === post.id)
+                      .length === 1
                   }
                   key={post.mediaURL}
                   routerProps={this.props.routerProps}
