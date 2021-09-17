@@ -88,6 +88,7 @@ export default class Routes extends React.Component<IRoutesProps> {
                 console.log(state);
                 return (
                   <MenuPage
+                    userID={props.match.params.userID}
                     post={state?.post}
                     routerProps={props}
                     merchantID={props.match.params.merchantID}

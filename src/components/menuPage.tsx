@@ -19,6 +19,7 @@ interface MenuPageProps {
   routerProps: RouterProps;
   selected: boolean;
   post: GetPostRes;
+  userID: string;
 }
 
 export default class MenuPage extends React.Component<
@@ -80,7 +81,9 @@ export default class MenuPage extends React.Component<
   public render() {
     const state = this.state;
     const discoverClick = (routerProps: RouterProps) => {
-      routerProps.history.push(`/pax/merchant/${this.props.merchantID}/posts`);
+      routerProps.history.push(
+        `/pax/${this.props.userID}/merchant/${this.props.merchantID}/posts`
+      );
     };
     return (
       <div className="App PostsWrapper">
