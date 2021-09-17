@@ -130,9 +130,12 @@ export default class PostPage extends React.Component<
                   postID: post.postID,
                   days: Number(this.state.days),
                 })
-                  .then(() => {
+                  .then((res) => {
+                    let post = this.state.post;
+                    post.boosted = res.success;
                     this.setState({
                       ...this.state,
+                      post: post,
                       boostClicked: false,
                     });
                   })
