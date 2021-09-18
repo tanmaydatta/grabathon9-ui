@@ -12,4 +12,6 @@ Run following to start project without docker
 
 Prerequisites
 * install node
+
+For best experience, open in mobile or mobile view.
   
